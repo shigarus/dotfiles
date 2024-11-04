@@ -94,6 +94,9 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
   --marker=">" --pointer="◆" --separator="─" --scrollbar="│"'
 export BAT_THEME="Monokai Extended Origin"
 
+# rg ignore unneded
+alias rg="rg --no-follow --glob '!{/proc,/sys,$(go env GOPATH),**/.git/*}' --hidden --files"
+
 
 function npc {
   pushd $NEBO &> /dev/null
