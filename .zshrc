@@ -64,7 +64,7 @@ alias npcmp="npc --profile man-prod"
 # set up fzf
 source <(fzf --zsh)
 if type rg &> /dev/null; then
-    export FZF_DEFAULT_COMMAND='rg --files --hidden'
+    export FZF_DEFAULT_COMMAND="rg --no-follow --glob '!{/proc,/sys,$(go env GOPATH),**/.git/*,**/bazel.+/**}' --hidden --files"
 fi
 alias nf='fzf -m --preview "bat --color=always {}" --bind "enter:become(nvim {+})"'
 alias fzf='fzf -m --preview "bat --color=always {}"'
