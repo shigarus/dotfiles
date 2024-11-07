@@ -8,6 +8,7 @@ jfrog-cli
 jq
 jwt-cli
 k9s
+kubectx
 kubebuilder
 kubernetes-cli
 lazygit

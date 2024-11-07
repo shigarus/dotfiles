@@ -22,5 +22,6 @@ Aleksandr
 treesitter
 autoscaler
 clusterapi
+healthcheck
 externalgrpc
 Autocompletion
