@@ -97,6 +97,7 @@ export BAT_THEME="Monokai Extended Origin"
 # rg ignore unneded
 alias rg="rg --no-follow --glob '!{/proc,/sys,$(go env GOPATH),**/.git/*}' --hidden --files"
 
+alias lg=lazygit
 
 function npc {
   pushd $NEBO &> /dev/null
