@@ -29,6 +29,8 @@ zoxide
 clipy
 macfuse
 
+bitwarden-cli
+
 arc-launcher
 bazelisk
 brotli
