@@ -58,8 +58,10 @@ alias k9mpc="k9s --context root-bastion-common-prod"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 alias npcl="NPC_OVERRIDE_RESOLVERS='nebius.mk8s.*=localhost:30080' npc --profile default --skip-tls-verification"
+alias npcts="npc --profile testing -I serviceaccount-e0tmk8s-dev"
 alias npct="npc --profile testing"
 alias npcmp="npc --profile man-prod"
+alias npcmps="npc --profile man-prod -I serviceaccount-e00mk8s-manager-sa"
 
 # set up fzf
 source <(fzf --zsh)
