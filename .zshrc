@@ -49,6 +49,7 @@ alias lso=ls
 eval $(thefuck --alias fk)
 
 # k9s settings
+export K9S_CONFIG_DIR="$HOME/.config/k9s"
 export K9S_LOGS_DIR="$HOME/.config/k9s"
 alias k9l="k9s --context kind-capi-mgmt-local"
 alias k9t="k9s --context ik8s-testing-management"
