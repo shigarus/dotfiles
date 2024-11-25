@@ -2,22 +2,6 @@
 autoload -Uz +X compinit && compinit -u
 autoload -U +X bashcompinit && bashcompinit
 
-# The next line updates PATH for CLI.
-if [ -f '/Users/shigarus/nebius-cloud/path.bash.inc' ]; then source '/Users/shigarus/nebius-cloud/path.bash.inc'; fi
-
-# The next line enables shell command completion for ncp.
-if [ -f '/Users/shigarus/nebius-cloud/completion.zsh.inc' ]; then source '/Users/shigarus/nebius-cloud/completion.zsh.inc'; fi
-
-
-# The next line updates PATH for Yandex Cloud Private CLI.
-if [ -f '/Users/shigarus/ycp/path.bash.inc' ]; then source '/Users/shigarus/ycp/path.bash.inc'; fi
-
-# kubebuilder autocompletion
-if [ -f /usr/local/share/bash-completion/bash_completion ]; then
-. /usr/local/share/bash-completion/bash_completion
-fi
-. <(kubebuilder completion zsh)
-
 # export DOCKER_HOST="${HOME}.colima/docker.sock"
 export NEBO=$HOME/nebo
 
@@ -46,7 +30,8 @@ alias l="eza --icons=always --color=always --group-directories-first"
 alias ls="eza --color=always -1 -l --git --no-filesize --no-user --no-permissions --icons=always --no-time --group-directories-first"
 alias lst="eza --color=always -1 -l --git --no-filesize --no-user --no-permissions --icons=always -T -L 2 --no-time --group-directories-first"
 alias lso=ls
-eval $(thefuck --alias fk)
+# slow af
+# eval $(thefuck --alias fk)
 
 # k9s settings
 export K9S_CONFIG_DIR="$HOME/.config/k9s"
@@ -66,6 +51,7 @@ alias npcmps="npc --profile man-prod -I serviceaccount-e00mk8s-manager-sa"
 
 # set up fzf
 source <(fzf --zsh)
+
 if type rg &> /dev/null; then
     export FZF_DEFAULT_COMMAND="rg --no-follow --glob '!{/proc,/sys,$(go env GOPATH),**/.git/*,**/bazel.+/**}' --hidden --files"
 fi
