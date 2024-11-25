@@ -126,3 +126,52 @@ eval "$(starship init zsh)"
 # ---- Zoxide (better cd) ----
 eval "$(zoxide init zsh)"
 alias cd=z
+
+
+
+##### WORK STUFF
+export BW_SESSION="eNUxsWdK0b6anXcNxulcOV1NV7rFtv5TfeX9WUCApPIztRG7tFPSlaLyhHIDxOFmGaS0NWhoE7SCPzK7Tr1vMA=="
+alias vnc="nvim ~/.config/newbius/config.yaml"
+function tssh {
+  ID=$1
+  REGION_ID=$ID
+  REGION_ID=${REGION_ID#mk8scluster-}
+  REGION_ID=${REGION_ID#computeinstance-}
+  if [[ "$REGION_ID" == e00* ]]; then
+    BASTION="bastion.man.nebiusinfra.net"
+    CONTEXT="root-bastion-mk8s-mgmt-prod"
+  elif [[ "$REGION_ID" == e0t* ]]; then
+    BASTION="bastion.man.nebiusinfra.net"
+    CONTEXT="root-bastion-mk8s-mgmt-testing"
+  elif [[ "$REGION_ID" == e01* ]]; then
+    BASTION="bastion.pa10.nebiusinfra.net"
+    CONTEXT="bastion-pa10-pa10-mk8s-mgmt-prod"
+  else
+    echo "Unknown region by ID: $REGION_ID, couldn't choose bastion proxy & kubectl context"
+    return
+  fi
+
+  if [[ "$ID" == computeinstance-* ]]; then
+    INSTANCE_ID=$ID
+  elif [[ "$ID" == mk8scluster-* ]]; then
+    INSTANCE_ID=$(kubectl get NebiusControlPlaneMachine --context "$CONTEXT" --namespace "mk8s" -l cluster.x-k8s.io/cluster-name=$ID -o jsonpath-as-json="{.items[*].spec.providerID}" | jq -r '.[0]')
+    INSTANCE_ID=${INSTANCE_ID#nebius://}
+  else
+    echo "Unknown type of ID: $REGION_ID, couldn't find instance id"
+    return
+  fi
+
+  tsh --proxy=$BASTION:443 ssh $INSTANCE_ID
+}
+
+function k8svars {
+  export CLOUD_USER=${CLOUD_USER:-${USER:?}}
+  export CONTAINER_ID=$(npc iam container get-by-name  --parent-id tenant-e0tmk8s-dev --name "${CLOUD_USER:?}-user" --format json | jq .metadata.id -r | tee /dev/stderr)
+  export SUBNET_ID=$(npc vpc  subnet list --parent-id ${CONTAINER_ID:?} --format json | jq '.items[] | .metadata.id' -r | tee /dev/stderr)
+}
+
+function createK8s {
+  k8svars
+  export CLUSTER_NAME="${CLUSTER_NAME:-test}"
+  export CLUSTER_ID=$(npcl mk8s cluster create --name "${CLUSTER_NAME:?}" --parent-id ${CONTAINER_ID:?} --control-plane-subnet-id ${SUBNET_ID:?} --control-plane-endpoints-public-endpoint --format json | jq .metadata.id -r | tee /dev/stderr)
+}
