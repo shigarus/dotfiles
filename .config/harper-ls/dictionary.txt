@@ -5,6 +5,7 @@ cp
 mk
 sw
 et
+fs
 cmp
 cmd
 npc
@@ -15,6 +16,8 @@ DNS
 VPC
 sts
 len
+uid
+cli
 nvim
 GRPC
 MK8S
