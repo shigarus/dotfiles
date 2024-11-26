@@ -1,27 +1,9 @@
-
 autoload -Uz +X compinit && compinit -u
 autoload -U +X bashcompinit && bashcompinit
 
-# export DOCKER_HOST="${HOME}.colima/docker.sock"
-export NEBO=$HOME/nebo
-
-# CGO_ENABLED=0
-# GO111MODULE=on
-# export GOROOT=/Users/aleksandrstovbyra/.ya/tools/v4/4773521027
-# GOARCH=arm64
-# export PATH=$GOROOT/bin:$PATH
+# pesonal cli apps folder
 export PATH=/Users/shigarus/.cargo/bin:/Users/shigarus/go/bin:/Users/shigarus/apps:$PATH
-# export PSSH_AUTH_SOCK="/private/var/tmp/pssh-agent.sock"
-alias dalaran="nssh --no-yubikey --ycp-profile sandbox-nemax shigarus-vm.dalaran-vm.nemax-sandbox.nebiuscloud.net"
-alias ya=/Users/shigarus/nebo/ya
 alias k=kubectl
-alias ku='kubectl --kubeconfig ~/temp/user-kube.conf --insecure-skip-tls-verify'
-alias nsshi="nssh --no-yubikey --ycp-profile israel"
-alias nsshn="nssh --no-yubikey --ycp-profile nemax"
-alias nsshnu="nsshn --user $USER"
-alias br="bazel run --ui_event_filters=-info,-debug,-warning,-stderr,-stdout --noshow_progress --logging=0"
-alias brc="bazel run --ui_event_filters=-info,-debug,-warning,-stderr,-stdout --noshow_progress --logging=0 //api/tools/cli --"
-alias clear-dns="sudo killall -HUP mDNSResponder"
 
 alias vim=nvim
 alias cz="vim ~/.zshrc"
@@ -36,18 +18,6 @@ alias lso=ls
 # k9s settings
 export K9S_CONFIG_DIR="$HOME/.config/k9s"
 export K9S_LOGS_DIR="$HOME/.config/k9s"
-alias k9l="k9s --context kind-capi-mgmt-local"
-alias k9t="k9s --context ik8s-testing-management"
-alias k9tc="k9s --context root-bastion-ik8s-beta"
-alias k9mp="k9s --context ik8s-man-prod-management"
-alias k9mpc="k9s --context root-bastion-common-prod"
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-
-alias npcl="NPC_OVERRIDE_RESOLVERS='nebius.mk8s.*=localhost:30080' npc --profile default --skip-tls-verification"
-alias npcts="npc --profile testing -I serviceaccount-e0tmk8s-dev"
-alias npct="npc --profile testing"
-alias npcmp="npc --profile man-prod"
-alias npcmps="npc --profile man-prod -I serviceaccount-e00mk8s-manager-sa"
 
 # set up fzf
 source <(fzf --zsh)
@@ -117,10 +87,6 @@ function tsh-login {
 bindkey "[D" backward-word
 bindkey "[C" forward-word
 
-# The next line updates PATH for Nebius CLI.
-if [ -f '/Users/shigarus/.nebius/path.bash.inc' ]; then source '/Users/shigarus/.nebius/path.bash.inc'; fi
-# The next line enables shell command completion for Nebius CLI.
-if [ -f '/Users/shigarus/.nebius/completion.zsh.inc' ]; then source '/Users/shigarus/.nebius/completion.zsh.inc'; fi
 eval "$(starship init zsh)"
 
 # ---- Zoxide (better cd) ----
@@ -130,7 +96,18 @@ alias cd=z
 
 
 ##### WORK STUFF
+export NEBO=$HOME/nebo
+alias ya=/Users/shigarus/nebo/ya
+
 export BW_SESSION="eNUxsWdK0b6anXcNxulcOV1NV7rFtv5TfeX9WUCApPIztRG7tFPSlaLyhHIDxOFmGaS0NWhoE7SCPzK7Tr1vMA=="
+
+# The next line is for oldbius cli
+if [ -f '/Users/shigarus/nebius-cloud/path.bash.inc' ]; then source '/Users/shigarus/nebius-cloud/path.bash.inc'; fi
+# The next line updates PATH for Nebius CLI.
+if [ -f '/Users/shigarus/.nebius/path.bash.inc' ]; then source '/Users/shigarus/.nebius/path.bash.inc'; fi
+# The next line enables shell command completion for Nebius CLI.
+if [ -f '/Users/shigarus/.nebius/completion.zsh.inc' ]; then source '/Users/shigarus/.nebius/completion.zsh.inc'; fi
+
 alias vnc="nvim ~/.config/newbius/config.yaml"
 function tssh {
   ID=$1
@@ -175,3 +152,23 @@ function createK8s {
   export CLUSTER_NAME="${CLUSTER_NAME:-test}"
   export CLUSTER_ID=$(npcl mk8s cluster create --name "${CLUSTER_NAME:?}" --parent-id ${CONTAINER_ID:?} --control-plane-subnet-id ${SUBNET_ID:?} --control-plane-endpoints-public-endpoint --format json | jq .metadata.id -r | tee /dev/stderr)
 }
+
+alias k9l="k9s --context kind-capi-mgmt-local"
+alias k9t="k9s --context ik8s-testing-management"
+alias k9tc="k9s --context root-bastion-ik8s-beta"
+alias k9mp="k9s --context ik8s-man-prod-management"
+alias k9mpc="k9s --context root-bastion-common-prod"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+alias npcl="NPC_OVERRIDE_RESOLVERS='nebius.mk8s.*=localhost:30080' npc --profile default --skip-tls-verification"
+alias npcts="npc --profile testing -I serviceaccount-e0tmk8s-dev"
+alias npct="npc --profile testing"
+alias npcmp="npc --profile man-prod"
+alias npcmps="npc --profile man-prod -I serviceaccount-e00mk8s-manager-sa"
+
+alias nsshi="nssh --no-yubikey --ycp-profile israel"
+alias nsshn="nssh --no-yubikey --ycp-profile nemax"
+alias nsshnu="nsshn --user $USER"
+alias br="bazel run --ui_event_filters=-info,-debug,-warning,-stderr,-stdout --noshow_progress --logging=0"
+alias brc="bazel run --ui_event_filters=-info,-debug,-warning,-stderr,-stdout --noshow_progress --logging=0 //api/tools/cli --"
+alias clear-dns="sudo killall -HUP mDNSResponder"
