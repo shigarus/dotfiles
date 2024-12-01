@@ -8,10 +8,10 @@ alias k=kubectl
 alias vim=nvim
 alias cz="vim ~/.zshrc"
 alias rsz="source ~/.zshrc"
+alias lso="eza --color=never"
 alias l="eza --icons=always --color=always --group-directories-first"
 alias ls="eza --color=always -1 -l --git --no-filesize --no-user --no-permissions --icons=always --no-time --group-directories-first"
 alias lst="eza --color=always -1 -l --git --no-filesize --no-user --no-permissions --icons=always -T -L 2 --no-time --group-directories-first"
-alias lso=ls
 # slow af
 # eval $(thefuck --alias fk)
 
