@@ -6,6 +6,7 @@ mk
 sw
 et
 fs
+vm
 cmp
 cmd
 npc
@@ -18,6 +19,8 @@ sts
 len
 uid
 cli
+iam
+env
 nvim
 GRPC
 MK8S
@@ -66,6 +69,7 @@ Aleksandr
 apiStatus
 apiserver
 ClusterIP
+nodegroup
 treesitter
 autoscaler
 clusterapi
@@ -81,6 +85,7 @@ externalgrpc
 controlplane
 infraVersion
 noinspection
+infraversion
 NebiusMachine
 Autocompletion
 publicclusters
