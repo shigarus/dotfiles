@@ -151,7 +151,7 @@ function k8svars {
 function createK8s {
   k8svars
   export CLUSTER_NAME="${CLUSTER_NAME:-test}"
-  export CLUSTER_ID=$(npcl mk8s cluster create --name "${CLUSTER_NAME:?}" --parent-id ${CONTAINER_ID:?} --control-plane-subnet-id ${SUBNET_ID:?} --control-plane-endpoints-public-endpoint --format json | jq .metadata.id -r | tee /dev/stderr)
+  export CLUSTER_ID=$(npc mk8s cluster create --name "${CLUSTER_NAME:?}" --parent-id ${CONTAINER_ID:?} --control-plane-subnet-id ${SUBNET_ID:?} --control-plane-endpoints-public-endpoint --format json | jq .metadata.id -r | tee /dev/stderr)
 }
 
 alias k9l="k9s --context kind-capi-mgmt-local"
