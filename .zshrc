@@ -138,7 +138,8 @@ function tssh {
     return
   fi
 
-  tsh --proxy=$BASTION:443 ssh $INSTANCE_ID
+  shift # remove instance or cluster id from list of args
+  tsh --proxy=$BASTION:443 ssh $INSTANCE_ID $@
 }
 
 function k8svars {
