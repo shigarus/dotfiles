@@ -77,13 +77,6 @@ function ito {
   echo $token
   export token
 }
-function tsh-login {
-  tsh kube login -n mk8s mk8s-mgmt-testing
-  tsh kube login -n mk8s mk8s-mgmt-prod
-  tsh kube login -n mk8s ik8s-beta
-  tsh kube login -n mk8s common-prod
-}
-
 bindkey "[D" backward-word
 bindkey "[C" forward-word
 
@@ -116,10 +109,10 @@ function tssh {
   REGION_ID=${REGION_ID#computeinstance-}
   if [[ "$REGION_ID" == e00* ]]; then
     BASTION="bastion.man.nebiusinfra.net"
-    CONTEXT="root-bastion-mk8s-mgmt-prod"
+    CONTEXT="bastion-man-man-mk8s-mgmt-prod"
   elif [[ "$REGION_ID" == e0t* ]]; then
     BASTION="bastion.man.nebiusinfra.net"
-    CONTEXT="root-bastion-mk8s-mgmt-testing"
+    CONTEXT="bastion-man-man-mk8s-mgmt-testing"
   elif [[ "$REGION_ID" == e01* ]]; then
     BASTION="bastion.pa10.nebiusinfra.net"
     CONTEXT="bastion-pa10-pa10-mk8s-mgmt-prod"
@@ -155,10 +148,10 @@ function createK8s {
 }
 
 alias k9l="k9s --context kind-capi-mgmt-local"
-alias k9t="k9s --context ik8s-testing-management"
-alias k9tc="k9s --context root-bastion-ik8s-beta"
-alias k9mp="k9s --context ik8s-man-prod-management"
-alias k9mpc="k9s --context root-bastion-common-prod"
+alias k9t="k9s --context bastion-man-man-mk8s-mgmt-testing -n mk8s"
+alias k9tc="k9s --context bastion-man-man-common-testing"
+alias k9mp="k9s --context bastion-man-man-mk8s-mgmt-prod -n mk8s"
+alias k9mpc="k9s --context bastion-man-man-common-prod"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 alias npcl="NPC_OVERRIDE_RESOLVERS='nebius.mk8s.*=localhost:30080' npc --profile default --skip-tls-verification"
@@ -173,3 +166,10 @@ alias nsshnu="nsshn --user $USER"
 alias br="bazel run --ui_event_filters=-info,-debug,-warning,-stderr,-stdout --noshow_progress --logging=0"
 alias brc="bazel run --ui_event_filters=-info,-debug,-warning,-stderr,-stdout --noshow_progress --logging=0 //api/tools/cli --"
 alias clear-dns="sudo killall -HUP mDNSResponder"
+
+function tsh-login {
+  tsh kube login -n mk8s man-mk8s-mgmt-testing
+  tsh kube login -n mk8s man-mk8s-mgmt-prod
+  tsh kube login -n mk8s man-common-testing
+  tsh kube login -n mk8s man-common-prod
+}
