@@ -63,7 +63,7 @@ function npc {
   local npcbin="$HOME/apps/npcbin"
   local lastBuildCommitPath="$HOME/.npc-last-build-commit"
   local lastBuildCommit=$(cat $lastBuildCommitPath)
-  local currentCommit=$(arc rev-parse HEAD)
+  local currentCommit=$(git rev-parse HEAD)
   if [[ "$lastBuildCommit" != "$currentCommit" ]]; then
     bazel build --stamp //api/tools/cli
     echo $currentCommit > $lastBuildCommitPath
