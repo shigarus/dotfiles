@@ -60,7 +60,7 @@ alias lg=lazygit
 
 function npc {
   pushd $NEBO &> /dev/null
-  local npcbin="$HOME/apps/npc"
+  local npcbin="$HOME/apps/npcbin"
   local lastBuildCommitPath="$HOME/.npc-last-build-commit"
   local lastBuildCommit=$(cat $lastBuildCommitPath)
   local currentCommit=$(arc rev-parse HEAD)
