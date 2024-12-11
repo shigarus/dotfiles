@@ -175,4 +175,6 @@ function tsh-login {
   tsh kube login -n mk8s man-mk8s-mgmt-prod
   tsh kube login -n mk8s man-common-testing
   tsh kube login -n mk8s man-common-prod
+  tsh kube login -n mk8s pa10-common-prod --proxy=bastion.pa10.nebiusinfra.net:443 && \
+  tsh kube login -n mk8s pa10-mk8s-mgmt-prod --proxy=bastion.pa10.nebiusinfra.net:443
 }
