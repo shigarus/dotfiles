@@ -178,3 +178,6 @@ function tsh-login {
   tsh kube login -n mk8s pa10-common-prod --proxy=bastion.pa10.nebiusinfra.net:443 && \
   tsh kube login -n mk8s pa10-mk8s-mgmt-prod --proxy=bastion.pa10.nebiusinfra.net:443
 }
+
+# The next line enables shell command completion for Nebius Private CLI.
+if [ -f '/Users/shigarus/.config/newbius/completion.zsh.inc' ]; then source '/Users/shigarus/.config/newbius/completion.zsh.inc'; fi
