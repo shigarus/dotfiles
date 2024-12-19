@@ -185,3 +185,5 @@ function tsh-login {
 
 # The next line enables shell command completion for Nebius Private CLI.
 if [ -f '/Users/shigarus/.config/newbius/completion.zsh.inc' ]; then source '/Users/shigarus/.config/newbius/completion.zsh.inc'; fi
+
+alias git-clean="git clean -d -x -f"
