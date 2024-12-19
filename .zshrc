@@ -157,6 +157,8 @@ alias k9t="k9s --context bastion-man-man-mk8s-mgmt-testing -n mk8s"
 alias k9tc="k9s --context bastion-man-man-common-testing"
 alias k9mp="k9s --context bastion-man-man-mk8s-mgmt-prod -n mk8s"
 alias k9mpc="k9s --context bastion-man-man-common-prod"
+alias k9pa10="k9s --context bastion-pa10-pa10-mk8s-mgmt-prod -n mk8s"
+alias k9pa10c="k9s --context bastion-pa10-pa10-common-prod"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 alias npcl="NPC_OVERRIDE_RESOLVERS='nebius.mk8s.*=localhost:30080' npc --profile default --skip-tls-verification"
