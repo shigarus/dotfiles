@@ -5,6 +5,7 @@ autoload -U +X bashcompinit && bashcompinit
 export PATH=/Users/shigarus/.cargo/bin:/Users/shigarus/go/bin:/Users/shigarus/apps:$PATH
 alias k=kubectl
 
+export EDITOR=nvim
 alias vim=nvim
 alias cz="vim ~/.zshrc"
 alias rsz="source ~/.zshrc"
