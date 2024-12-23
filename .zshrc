@@ -61,7 +61,7 @@ alias rg="rg --no-follow --glob '!{/proc,/sys,$(go env GOPATH),**/.git/*}' --hid
 
 alias lg=lazygit
 
-function npc {
+function npc-update {
   pushd $NEBO &> /dev/null
   local npcbin="$HOME/apps/npcbin"
   local lastBuildCommitPath="$HOME/.npc-last-build-commit"
@@ -75,6 +75,11 @@ function npc {
   popd &> /dev/null
   $npcbin $@
 }
+
+function npc {
+  $HOME/apps/npcbin $@
+}
+
 function ito {
   token=$(npc iam get-access-token | grep "v1.")
   echo $token
