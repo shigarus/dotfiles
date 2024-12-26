@@ -195,3 +195,7 @@ function tsh-login {
 if [ -f '/Users/shigarus/.config/newbius/completion.zsh.inc' ]; then source '/Users/shigarus/.config/newbius/completion.zsh.inc'; fi
 
 alias git-clean="git clean -d -x -f"
+alias yq-get-id="yq '.metadata.id' | tee /dev/stderr"
+function show-tenant {
+  $1 iam tenant get --id $(npc iam project get --id $2 | yq -r '.metadata.parent_id') | yq '.metadata'
+}
