@@ -149,6 +149,7 @@ function tssh {
 function k8svars {
   export CLOUD_USER=${CLOUD_USER:-${USER:?}}
   export CONTAINER_ID=$(npc iam container get-by-name  --parent-id tenant-e0tmk8s-dev --name "${CLOUD_USER:?}-user" --format json | jq .metadata.id -r | tee /dev/stderr)
+  export CONTAINER_ID=$(npc iam container get-by-name  --parent-id tenant-e0tmk8s-dev-user --name "${CLOUD_USER:?}-user-beta" --format json | jq .metadata.id -r | tee /dev/stderr)
   export SUBNET_ID=$(npc vpc  subnet list --parent-id ${CONTAINER_ID:?} --format json | jq '.items[] | .metadata.id' -r | tee /dev/stderr)
 }
 
