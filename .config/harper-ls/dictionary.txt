@@ -21,6 +21,7 @@ uid
 cli
 iam
 env
+VMs
 nvim
 GRPC
 MK8S
@@ -33,6 +34,8 @@ CIDR
 LS's
 CTRL
 tmux
+etcd
+yaml
 gopls
 proto
 gosdk
@@ -47,6 +50,7 @@ subnet
 goland
 nolint
 neovim
+defrag
 stdpath
 luasnip
 evgenii
@@ -57,6 +61,7 @@ russian
 Keymaps
 keymaps
 unicode
+etcdctl
 filetype
 Stovbyra
 JSONPath
@@ -77,6 +82,7 @@ kubernetes
 omelchenko
 reconciler
 stylecheck
+kubeconfig
 healthcheck
 kubebuilder
 subresource
@@ -91,5 +97,6 @@ Autocompletion
 publicclusters
 PublicOperation
 GoSnakeCaseUsage
+DeadlineExceeded
 creationTimestamp
 NebiusMachineTemplate
