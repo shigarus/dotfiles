@@ -201,3 +201,6 @@ alias yq-get-id="yq '.metadata.id' | tee /dev/stderr"
 function show-tenant {
   $1 iam tenant get --id $(npc iam project get --id $2 | yq -r '.metadata.parent_id') | yq '.metadata'
 }
+function cluster_from_instance {
+  npcmps compute instance get --id $1 | yq '.metadata.labels.mk8s-cluster-id'
+}
