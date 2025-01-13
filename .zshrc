@@ -60,6 +60,8 @@ export BAT_THEME="Monokai Extended Origin"
 alias rg="rg --no-follow --glob '!{/proc,/sys,$(go env GOPATH),**/.git/*}' --hidden --files"
 
 alias lg=lazygit
+alias st="git status"
+alias g="git"
 
 function npc-update {
   pushd $NEBO &> /dev/null
