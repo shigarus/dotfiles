@@ -206,3 +206,11 @@ function show-tenant {
 function cluster_from_instance {
   npcmps compute instance get --id $1 | yq '.metadata.labels.mk8s-cluster-id'
 }
+function docker-relogin {
+  docker logout cr.eu-west1.nebius.cloud 
+  docker logout cr.eu-north1.nebius.cloud
+  docker logout cr-testing.eu-north1.nebius.cloud
+  docker login cr.eu-west1.nebius.cloud -u iam -p $(npc iam get-access-token --profile pa10-prod)
+  docker login cr.eu-north1.nebius.cloud -u iam -p $(npc iam get-access-token --profile man-prod)
+  docker login cr-testing.eu-north1.nebius.cloud -u iam -p $(npc iam get-access-token --profile testing)
+}
