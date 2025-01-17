@@ -65,7 +65,7 @@ alias g="git"
 
 function npc-update {
   pushd $NEBO &> /dev/null
-  local npcbin="$HOME/apps/npcbin"
+  local npcbin="$HOME/apps/npc"
   local lastBuildCommitPath="$HOME/.npc-last-build-commit"
   local lastBuildCommit=$(cat $lastBuildCommitPath)
   local currentCommit=$(git rev-parse HEAD)
@@ -79,7 +79,7 @@ function npc-update {
 }
 
 function npc {
-  $HOME/apps/npcbin $@
+  $HOME/apps/npc $@
 }
 
 function ito {
