@@ -87,8 +87,10 @@ function ito {
   echo $token
   export token
 }
-bindkey "[D" backward-word
-bindkey "[C" forward-word
+bindkey "^[b" backward-word
+bindkey "^[f" forward-word
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
 
 eval "$(starship init zsh)"
 
