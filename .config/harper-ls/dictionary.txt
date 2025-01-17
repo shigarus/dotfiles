@@ -51,6 +51,7 @@ goland
 nolint
 neovim
 defrag
+Rebase
 stdpath
 luasnip
 evgenii
@@ -62,6 +63,7 @@ Keymaps
 keymaps
 unicode
 etcdctl
+coredns
 filetype
 Stovbyra
 JSONPath
