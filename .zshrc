@@ -92,6 +92,10 @@ bindkey "^[f" forward-word
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
 
+if [[ "${widgets[zle-keymap-select]#user:}" == "starship_zle-keymap-select" || \
+      "${widgets[zle-keymap-select]#user:}" == "starship_zle-keymap-select-wrapped" ]]; then
+    zle -N zle-keymap-select "";
+fi
 eval "$(starship init zsh)"
 
 # ---- Zoxide (better cd) ----
