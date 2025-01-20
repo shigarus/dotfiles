@@ -162,6 +162,12 @@ function createK8s {
   export CLUSTER_ID=$(npc mk8s cluster create --name "${CLUSTER_NAME:?}" --parent-id ${CONTAINER_ID:?} --control-plane-subnet-id ${SUBNET_ID:?} --control-plane-endpoints-public-endpoint --format json | jq .metadata.id -r | tee /dev/stderr)
 }
 
+function createK8sl {
+  k8svars
+  CLUSTER_NAME="${CLUSTER_NAME:-test}"
+  export CLUSTER_ID=$(npcl mk8s cluster create --name "${CLUSTER_NAME:?}" --parent-id ${CONTAINER_ID:?} --control-plane-subnet-id ${SUBNET_ID:?} --control-plane-endpoints-public-endpoint --format json | jq .metadata.id -r | tee /dev/stderr)
+}
+
 alias k9l="k9s --context kind-capi-mgmt-local"
 alias k9t="k9s --context bastion-man-man-mk8s-mgmt-testing -n mk8s"
 alias k9tc="k9s --context bastion-man-man-common-testing"
