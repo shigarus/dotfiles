@@ -7,6 +7,7 @@ sw
 et
 fs
 vm
+pc
 cmp
 cmd
 npc
@@ -22,6 +23,8 @@ cli
 iam
 env
 VMs
+dev
+PLS
 nvim
 GRPC
 MK8S
@@ -36,6 +39,7 @@ CTRL
 tmux
 etcd
 yaml
+npcl
 gopls
 proto
 gosdk
@@ -71,6 +75,8 @@ deepcopy
 tsserver
 Keybinds
 tooltips
+dropdown
+teamcity
 filetypes
 Aleksandr
 apiStatus
