@@ -78,10 +78,6 @@ function npc-update {
   $npcbin $@
 }
 
-function npc {
-  $HOME/apps/npc $@
-}
-
 function ito {
   token=$(npc iam get-access-token | grep "v1.")
   echo $token
