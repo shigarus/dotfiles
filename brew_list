@@ -15,6 +15,7 @@ kubernetes-cli
 lazygit
 maven
 neovim
+parallel
 starship
 stow
 terraform
