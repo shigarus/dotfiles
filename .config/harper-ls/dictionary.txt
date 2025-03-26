@@ -83,6 +83,8 @@ apiStatus
 apiserver
 ClusterIP
 nodegroup
+namespace
+configmap
 treesitter
 autoscaler
 clusterapi
