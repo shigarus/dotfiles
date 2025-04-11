@@ -1,8 +1,8 @@
 format="""
 $username$directory$git_branch$kubernetes$gcloud$aws$cmd_duration$sudo$custom$line_break\
+$time\
 $jobs\
 $battery\
-$time\
 $status\
 $os\
 $container\
@@ -10,36 +10,40 @@ $shell\
 $character\
 """
 
+[character] # The name of the module we are configuring is 'character'
+success_symbol = '[ ](bold green)'
+error_symbol = '[ ](bold red)'
+
 [aws]
-format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'
+format = ' [$symbol($profile)(\($region\))($duration)]($style)'
 
 [cmd_duration]
-format = '\[[⏱ $duration]($style)\]'
+format = ' [⏱ $duration]($style)'
 
 [gcloud]
-format = '\[[$symbol$account(@$domain)(\($region\))]($style)\]'
+format = ' [$symbol$account(@$domain)(\($region\))]($style)'
 
 [git_branch]
-format = '\[[$symbol$branch]($style)\]'
+format = ' [$symbol$branch]($style)'
 
 [git_status]
-format = '([\[$all_status$ahead_behind\]]($style))'
+format = ' ([$all_status$ahead_behind]($style))'
 
 [kubernetes]
-format = '\[[$symbol$context( \($namespace\))]($style)\]'
+format = ' [$symbol$context(/$namespace)]($style)'
 disabled = false
 
 [sudo]
-format = '\[[as $symbol]($style)\]'
+format = ' [as $symbol]($style)'
 
 [time]
-format = '\[[$time]($style)\]'
+format = '[$time]($style) '
 disabled = false
 
 [username]
-format = '\[[$user]($style)\]'
+format = ' [$user]($style)'
 
 [custom.npc]
 when = 'which npc'
 command = 'npc profile current'
-format = '\[[󰢀 $output]($style)\]'
+format = ' [󰢀 $output]($style)'
