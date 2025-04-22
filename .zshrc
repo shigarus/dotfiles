@@ -3,18 +3,8 @@ autoload -U +X bashcompinit && bashcompinit
 
 # pesonal cli apps folder
 export PATH=/Users/shigarus/.cargo/bin:/Users/shigarus/go/bin:/Users/shigarus/apps:$PATH
-alias k=kubectl
 
 export EDITOR=nvim
-alias vim=nvim
-alias cz="vim ~/.zshrc"
-alias rsz="source ~/.zshrc"
-alias lso="eza --color=never"
-alias l="eza --icons=always --color=always --group-directories-first"
-alias ls="eza --color=always -1 -l --no-filesize --no-user --no-permissions --icons=always --no-time --group-directories-first"
-alias lsg="eza --color=always -1 -l --git --no-filesize --no-user --no-permissions --icons=always --no-time --group-directories-first"
-alias lst="eza --color=always -1 -l --no-filesize --no-user --no-permissions --icons=always -T -L 2 --no-time --group-directories-first"
-alias lsw="eza --color=always -1 -l --git --icons=always -T -L 2 --no-time --group-directories-first"
 # slow af
 # eval $(thefuck --alias fk)
 
@@ -28,8 +18,6 @@ source <(fzf --zsh)
 if type rg &> /dev/null; then
     export FZF_DEFAULT_COMMAND="rg --no-follow --glob '!{/proc,/sys,$(go env GOPATH),**/.git/*,**/bazel.+/**}' --hidden --files"
 fi
-alias nf='fzf -m --preview "bat --color=always {}" --bind "enter:become(nvim {+})"'
-alias fzf='fzf -m --preview "bat --color=always {}"'
 export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
 export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
 # Advanced customization of fzf options via _fzf_comprun function
@@ -59,30 +47,6 @@ export BAT_THEME="Monokai Extended Origin"
 # rg ignore unneded
 alias rg="rg --no-follow --glob '!{/proc,/sys,$(go env GOPATH),**/.git/*}' --hidden --files"
 
-alias lg=lazygit
-alias st="git status"
-alias g="git"
-
-function npc-update {
-  pushd $NEBO &> /dev/null
-  local npcbin="$HOME/apps/npc"
-  local lastBuildCommitPath="$HOME/.npc-last-build-commit"
-  local lastBuildCommit=$(cat $lastBuildCommitPath)
-  local currentCommit=$(git rev-parse HEAD)
-  if [[ "$lastBuildCommit" != "$currentCommit" ]]; then
-    bazel build --stamp //api/tools/cli
-    echo $currentCommit > $lastBuildCommitPath
-    ln -fs "$(dirname $(bazel info output_path))/$(bazel cquery //api/tools/cli --output=files)" "$npcbin"
-  fi
-  popd &> /dev/null
-  $npcbin $@
-}
-
-function ito {
-  token=$(npc iam get-access-token | grep "v1.")
-  echo $token
-  export token
-}
 bindkey "^[b" backward-word
 bindkey "^[f" forward-word
 bindkey "^A" beginning-of-line
@@ -92,13 +56,30 @@ if [[ "${widgets[zle-keymap-select]#user:}" == "starship_zle-keymap-select" || \
       "${widgets[zle-keymap-select]#user:}" == "starship_zle-keymap-select-wrapped" ]]; then
     zle -N zle-keymap-select "";
 fi
-eval "$(starship init zsh)"
 
 # ---- Zoxide (better cd) ----
 eval "$(zoxide init zsh)"
-alias cd=z
 
+alias k=kubectl
+alias vim=nvim
 alias kx=kubectx
+alias cd=z
+alias ls="eza --color=always -1 -l --no-filesize --no-user --no-permissions --icons=always --no-time --group-directories-first"
+alias lg=lazygit
+alias g="git"
+
 alias v="nvim ."
+alias nf='fzf -m --preview "bat --color=always {}" --bind "enter:become(nvim {+})"'
+alias fzf='fzf -m --preview "bat --color=always {}"'
+alias st="git status"
+alias lso="eza --color=never"
+alias l="eza --icons=always --color=always --group-directories-first"
+alias lsg="eza --color=always -1 -l --git --no-filesize --no-user --no-permissions --icons=always --no-time --group-directories-first"
+alias lst="eza --color=always -1 -l --no-filesize --no-user --no-permissions --icons=always -T -L 2 --no-time --group-directories-first"
+alias lsw="eza --color=always -1 -l --git --icons=always -T -L 2 --no-time --group-directories-first"
+
+alias rsz="source ~/.zshrc"
 
 source ~/work-dotfiles/zshrc
+
+eval "$(starship init zsh)"
