@@ -5,6 +5,8 @@ gimp
 git-credential-manager
 helm
 eza
+fish
+fish-lsp
 jfrog-cli
 jq
 jwt-cli
