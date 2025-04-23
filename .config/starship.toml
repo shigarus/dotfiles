@@ -1,6 +1,5 @@
 format="""
 $username$directory$git_branch$kubernetes$gcloud$aws$cmd_duration$sudo$custom$line_break\
-$time\
 $jobs\
 $battery\
 $status\
@@ -9,10 +8,6 @@ $container\
 $shell\
 $character\
 """
-
-[character] # The name of the module we are configuring is 'character'
-success_symbol = '[ ](bold green)'
-error_symbol = '[ ](bold red)'
 
 [aws]
 format = ' [$symbol($profile)(\($region\))($duration)]($style)'

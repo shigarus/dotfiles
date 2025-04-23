@@ -4,9 +4,11 @@ git-lfs
 gimp
 git-credential-manager
 helm
+kubie
 eza
 fish
 fish-lsp
+fisher
 jfrog-cli
 jq
 jwt-cli
