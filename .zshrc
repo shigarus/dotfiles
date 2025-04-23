@@ -1,6 +1,8 @@
 autoload -Uz +X compinit && compinit -u
 autoload -U +X bashcompinit && bashcompinit
 
+return 0
+
 # pesonal cli apps folder
 export PATH=/Users/shigarus/.cargo/bin:/Users/shigarus/go/bin:/Users/shigarus/apps:$PATH
 
