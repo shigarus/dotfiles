@@ -4,6 +4,7 @@ fish_add_path -g /Users/shigarus/apps
 source $__fish_config_dir/env.fish
 if status is-interactive
     set -g fish_greeting
+    set -g fish_key_bindings fish_vi_key_bindings
 
     alias vim=nvim
 
