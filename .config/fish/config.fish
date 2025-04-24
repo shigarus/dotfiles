@@ -1,6 +1,7 @@
-fish_add_path -g '/Users/shigarus/.cargo/bin'
-fish_add_path -g /Users/shigarus/go/bin
-fish_add_path -g /Users/shigarus/apps
+fish_add_path -g '$HOME/.cargo/bin'
+fish_add_path -g $HOME/go/bin
+fish_add_path -g $HOME/apps
+fish_add_path -g $HOME/.krew/bin
 source $__fish_config_dir/env.fish
 if status is-interactive
     set -g fish_greeting
