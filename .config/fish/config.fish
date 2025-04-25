@@ -17,8 +17,8 @@ if status is-interactive
     abbr -a --command git st status
     abbr -a --command git c checkout
     abbr -a --command git ct checkout trunk
-    abbr -a --command git p pull >/dev/null
-    abbr -a --command git clean clean -d -x -f
+    abbr -a --command git p "pull >/dev/null"
+    abbr -a --command git clean "clean -d -x -f"
 
     abbr -a v --set-cursor "vim ./%"
 
