@@ -31,6 +31,28 @@ if status is-interactive
     set -gx BAT_THEME "Monokai Extended Origin"
 
     function starship_transient_prompt_func
+        if test "$CMD_DURATION" -ge 3000
+            set res ""
+            set secs (math floor (math $CMD_DURATION / 1000))
+            set hrs (math floor (math $secs / 3600))
+            if not test "$hrs" = 0
+                set secs (math $secs - (math $hrs \* 3600))
+                set st h
+                set res "$hrs$st"
+            end
+            set mins (math floor (math $secs / 60))
+            if not test "$mins" = 0
+                set secs (math $secs - (math $mins \* 60))
+                set st m
+                set res "$res$mins$st"
+            end
+
+            set st s
+            set_color yellow
+            echo "$res$secs$st"
+
+            set CMD_DURATION 0
+        end
         starship module character
     end
     function starship_transient_rprompt_func
