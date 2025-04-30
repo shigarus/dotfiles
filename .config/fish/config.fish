@@ -53,13 +53,20 @@ if status is-interactive
 
             set CMD_DURATION 0
         end
+        # somehow $status can't be read here and always equals zero
+        # if not test "$status" = 0
+        #     set_color red
+        #     echo "a❯"
+        # else
         starship module character
+        # end
     end
     function starship_transient_rprompt_func
         starship module time
     end
     starship init fish | source
     enable_transience
+    fzf_configure_bindings
 
     if test -e $HOME/work-dotfiles/work_config.fish
         source $HOME/work-dotfiles/work_config.fish
