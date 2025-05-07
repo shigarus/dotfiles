@@ -1,1 +1,4 @@
-snap
+autotools-dev
+automake
+bison
+libevent-dev
