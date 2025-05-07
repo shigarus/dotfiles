@@ -1,6 +1,8 @@
 autoload -Uz +X compinit && compinit -u
 autoload -U +X bashcompinit && bashcompinit
 
+alias ivm="ssh shigarus-ivm -X -A"
+
 return 0
 
 # pesonal cli apps folder
