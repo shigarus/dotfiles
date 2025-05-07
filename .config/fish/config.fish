@@ -9,17 +9,27 @@ if status is-interactive
 
     alias vim=nvim
 
+    function _smart_commit_msg
+        set branch (git branch --show-current)
+        set result ""
+        if functions -q work_commit_msg
+            set result (work_commit_msg $branch)
+        end
+        echo "commit -m \"$result%\""
+    end
+
     abbr -a k kubectl
     abbr -a kx kubectx
     abbr -a ku kubie ctx
     abbr -a lg lazygit
     abbr -a g git
     abbr -a --command git st status
-    abbr -a --command git c checkout
+    abbr -a --command git ch checkout
     abbr -a --command git ct checkout trunk
     abbr -a --command git p "pull >/dev/null"
     abbr -a --command git clean "clean -d -x -f"
     abbr -a --command git a --set-cursor "add .%"
+    abbr -a --command git --set-cursor co -f _smart_commit_msg
 
     abbr -a v --set-cursor "vim ./%"
 
