@@ -86,6 +86,11 @@ if [ ! -d "~/.tmux/plugins/tpm" ]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
+if ! command bat $(basename "$0") 2>&1 >/dev/null
+then
+  to_bat=$(which batcat)
+  ln -s $to_bat $(dirname $to_bat)/bat
+fi
 
 sudo snap install nvim --classic
 
