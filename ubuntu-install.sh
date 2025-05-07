@@ -77,6 +77,7 @@ if ! command tmux 2>&1 >/dev/null
 then
   git clone https://github.com/tmux/tmux.git ~/.tmux-git
   cd ~/.tmux-git
+  git checkout tmux-3.5a
   sh autogen.sh
   ./configure
   make && sudo make install
