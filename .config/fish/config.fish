@@ -26,7 +26,8 @@ if status is-interactive
     abbr -a --command git st status
     abbr -a --command git ch checkout
     abbr -a --command git ct checkout trunk
-    abbr -a --command git p "pull >/dev/null"
+    abbr -a --command git p "push"
+    abbr -a --command git pl "pull >/dev/null"
     abbr -a --command git clean "clean -d -x -f"
     abbr -a --command git a --set-cursor "add .%"
     abbr -a --command git --set-cursor co -f _smart_commit_msg
