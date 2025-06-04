@@ -1,5 +1,5 @@
 format="""
-$username$directory$git_branch$kubernetes$gcloud$aws$cmd_duration$sudo$custom$line_break\
+$username$directory$git_branch$kubernetes$gcloud$aws$custom$cmd_duration$sudo$line_break\
 $jobs\
 $battery\
 $status\
@@ -25,8 +25,13 @@ format = ' [$symbol$branch]($style)'
 format = ' ([$all_status$ahead_behind]($style))'
 
 [kubernetes]
-format = ' [$symbol$context(/$namespace)]($style)'
 disabled = false
+format = ' [$symbol$context(:$namespace)]($style) '
+contexts = [
+  { context_pattern = ".*-prod.*", style = "red" },
+  { context_pattern = ".*-testing.*", style = "yellow" },
+  { context_pattern = ".*-local.*", style = "green" },
+]
 
 [sudo]
 format = ' [as $symbol]($style)'
@@ -38,7 +43,22 @@ disabled = false
 [username]
 format = '[$user]($style) '
 
-[custom.npc]
-when = 'which npc'
-command = 'npc profile current'
-format = ' [󰢀 $output]($style)'
+[custom.npc-prod]
+command = "npc profile current"
+when = "npc profile current | grep -qE '.*prod.*'"
+format = "[󰢀 $output $symbol](red)"
+
+[custom.npc-testing]
+command = "npc profile current"
+when = "npc profile current | grep -qE '.*testing.*'"
+format = "[󰢀 $output $symbol](yellow)"
+
+[custom.npc-local]
+command = "npc profile current"
+when = "npc profile current | grep -qE '.*local.*'"
+format = "[󰢀 $output $symbol](green)"
+
+[custom.npc-default]
+command = "npc profile current"
+when = "npc profile current | grep -vqE '.*(prod|testing|local)*'"
+format = "󰢀 $output $symbol"
