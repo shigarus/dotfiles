@@ -31,6 +31,8 @@ if status is-interactive
     abbr -a --command git clean "clean -d -x -f"
     abbr -a --command git a --set-cursor "add ./%"
     abbr -a --command git --set-cursor co -f _smart_commit_msg
+    abbr -a --command git d diff
+    abbr -a rsc "source ~/.config/fish/config.fish"
 
     abbr -a v --set-cursor "vim ./%"
 
