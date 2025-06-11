@@ -80,6 +80,17 @@ if status is-interactive
     end
     starship init fish | source
     enable_transience
+
+    function notify_long_tasks --on-event fish_postexec
+        if type -q osascript
+            if [ "$CMD_DURATION" -gt 3000 ]
+                set cmd (string split " " -- $argv)[1]
+                # to make it work on mac first time - open Script editor, run a command inside quotes and
+                # allow notifications from the editor
+                osascript -e "display notification \"$argv\" with title \"$cmd\""
+            end
+        end
+    end
     fzf_configure_bindings
 
     if test -e $HOME/work-dotfiles/work_config.fish
