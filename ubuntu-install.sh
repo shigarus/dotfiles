@@ -95,6 +95,8 @@ fi
 
 sudo snap install nvim --classic
 
+cargo install protols
+
 echo "----------------------"
 echo "----------------------"
 echo "----------------------"
