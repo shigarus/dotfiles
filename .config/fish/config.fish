@@ -83,11 +83,14 @@ if status is-interactive
 
     function notify_long_tasks --on-event fish_postexec
         if type -q osascript
+            # for now works only on mac and only on local machine
             if [ "$CMD_DURATION" -gt 3000 ]
                 set cmd (string split " " -- $argv)[1]
                 # to make it work on mac first time - open Script editor, run a command inside quotes and
                 # allow notifications from the editor
-                osascript -e "display notification \"$argv\" with title \"$cmd\""
+                if ! string match -r 'k9s|vim|sleep' "$cmd" -q
+                    osascript -e "display notification \"$argv\" with title \"$cmd\""
+                end
             end
         end
     end
