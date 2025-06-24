@@ -88,7 +88,7 @@ if status is-interactive
                 set cmd (string split " " -- $argv)[1]
                 # to make it work on mac first time - open Script editor, run a command inside quotes and
                 # allow notifications from the editor
-                if ! string match -r 'k9s|vim|sleep|lazygit|git|ivm-login' "$cmd" -q
+                if ! string match -r 'k9s|vim|sleep|lazygit|git|ivm-login|kubie|python' "$cmd" -q
                     osascript -e "display notification \"$argv\" with title \"$cmd\""
                 end
             end
