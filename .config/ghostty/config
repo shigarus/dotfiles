@@ -1,4 +1,5 @@
 keybind = super+ctrl+k=text:date\nsudo -i\nalias k3="k3s kubectl"\nalias k="kubectl --kubeconfig kube.conf"\nk3 get secret kubeconfig -o jsonpath='{.data.value}' | base64 -d > kube.conf\nalias ec="k3s kubectl exec -ti etcd -- etcdctl --endpoints=\"[::1]\":2379 --cert /etc/kubernetes/pki/etcd/server.crt --key /etc/kubernetes/pki/etcd/server.key --cacert /etc/kubernetes/pki/etcd/ca.crt"\nalias etcdctl="ec"\nalias ecs="ec endpoint status"\nalias calogs="k3 logs cluster-autoscaler-bin > ca.log && less ca.log"\nalias kk="kubectl --kubeconfig kube.conf -n kube-system"\n
 keybind = super+ctrl+n=text:k get pods --all-namespaces -o wide --field-selector spec.nodeName=
 theme = Monokai Pro
+macos-titlebar-style = tabs
 # background-opacity = 0.5
