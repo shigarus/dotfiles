@@ -25,14 +25,15 @@ yabai -m rule --add app="^${apps_mgoff_above}$" manage=off sub-layer=above
 ###############################################################################
 
 if command -v sketchybar &>/dev/null; then
-if [[ "$(system_profiler SPDisplaysDataType | grep Resolution | wc -l)" == *"2"* ]]; then
-    yabai -m config top_padding 38
-else
-    yabai -m config top_padding 10
-fi
+    if [[ "$(system_profiler SPDisplaysDataType | grep Resolution | wc -l)" == *"2"* ]]; then
+        yabai -m config top_padding 38
+        yabai -m config right_padding 260
+    else
+        yabai -m config top_padding 10
+        yabai -m config right_padding 230
+    fi
     yabai -m config bottom_padding 0
     yabai -m config left_padding 0
-    yabai -m config right_padding 0
   # Check the display size (e.g., grab the resolution here)
   # display_resolution=$(system_profiler SPDisplaysDataType | grep Resolution)
   # # First condition is to match my macbook pro, the * are used as wildcards
