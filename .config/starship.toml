@@ -46,19 +46,19 @@ format = '[$user]($style) '
 [custom.npc-prod]
 command = "npc profile current"
 when = "npc profile current | grep -qE '.*prod.*'"
-format = "[󰢀 $output $symbol](red)"
+format = " [󰢀 $output $symbol](red)"
 
 [custom.npc-testing]
 command = "npc profile current"
 when = "npc profile current | grep -qE '.*testing.*'"
-format = "[󰢀 $output $symbol](yellow)"
+format = " [󰢀 $output $symbol](yellow)"
 
 [custom.npc-local]
 command = "npc profile current"
 when = "npc profile current | grep -qE '.*local.*'"
-format = "[󰢀 $output $symbol](green)"
+format = " [󰢀 $output $symbol](green)"
 
 [custom.npc-default]
 command = "npc profile current"
 when = "npc profile current | grep -vqE '.*(prod|testing|local)*'"
-format = "󰢀 $output $symbol"
+format = " 󰢀 $output $symbol"
