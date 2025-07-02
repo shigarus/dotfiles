@@ -18,11 +18,13 @@ JSONPath
 K3S
 Keybinds
 LS's
+NebiusControlPlane
 NebiusMachine
 NebiusMachineTemplate
 PLS
 PR
 PRCM
+PublicCluster
 PublicOperation
 Rebase
 STDOUT
@@ -91,6 +93,7 @@ neovim
 nodegroup
 noinspection
 nolint
+nowait
 npc
 npcl
 nvim
