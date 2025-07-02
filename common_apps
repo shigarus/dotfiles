@@ -17,6 +17,8 @@ maven
 npm
 parallel
 ripgrep
+shellcheck
+shfmt
 stow
 terraform
 thefuck
