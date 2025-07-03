@@ -36,6 +36,11 @@ if status is-interactive
 
     abbr -a v --set-cursor "vim ./%"
 
+    function last_history_item
+        echo $history[1]
+    end
+    abbr -a !! --position anywhere --function last_history_item
+
     alias ls "eza --color=always -1 -l --no-filesize --no-user --no-permissions --icons=always --no-time --group-directories-first"
     alias lso="eza --color=never"
     alias l="eza --icons=always --color=always --group-directories-first"
