@@ -1,5 +1,5 @@
-autoload -Uz +X compinit && compinit -u
-autoload -U +X bashcompinit && bashcompinit
+#autoload -Uz +X compinit && compinit -u
+#autoload -U +X bashcompinit && bashcompinit
 
 alias ivm="ssh shigarus-ivm -X -A"
 

@@ -25,7 +25,7 @@ yabai -m rule --add app="^${apps_mgoff_above}$" manage=off sub-layer=above
 ###############################################################################
 
 if command -v sketchybar &>/dev/null; then
-    if [[ "$(system_profiler SPDisplaysDataType | grep Resolution | wc -l)" == *"2"* ]]; then
+    if [[ "$(system_profiler SPDisplaysDataType | grep Resolution)" == *"2160"* ]]; then
         yabai -m config top_padding 38
         yabai -m config right_padding 260
     else
@@ -111,6 +111,29 @@ yabai -m config layout stack
 # yabai -m config layout bsp
 # yabai -m config layout float
 
+yabai -m config window_shadow off
+
+yabai -m config window_opacity on
+opacity_value=0.87
+yabai -m signal --add event=window_focused app="^${apps_transparent}$" action="yabai -m config active_window_opacity $opacity_value"
+# I don't want to be moving Ghostty around to other desktops, so I'll set its
+# opacity to 1 and manage its transparency through the ghostty config file
+yabai -m signal --add event=window_focused app="Ghostty" action="yabai -m config active_window_opacity 1"
+yabai -m signal --add event=window_focused app="^${apps_transparent}$" action="yabai -m config normal_window_opacity 0.00001"
+
+# I want the apps here to always be shown, probably they'll be on the right
+# padding section. This is my "sticky notes"
+yabai -m rule --add app="^${apps_transp_ignore}$" opacity=$opacity_value
+
+# When any other app gains focus, reset both active and background window opacity to fully visible
+yabai -m signal --add event=window_focused app!="^${apps_transparent}$" action="yabai -m config active_window_opacity 1.0"
+yabai -m signal --add event=window_focused app!="^${apps_transparent}$" action="yabai -m config normal_window_opacity 1.0"
+
+# Nice trick shared by @timhansinger8030 in my YouTube video https://youtu.be/SLCR1oO65GI
+# Allows to see mission control apps when calling mission control from a transparent app
+yabai -m signal --add event=mission_control_enter action="yabai -m config normal_window_opacity 1.0"
+yabai -m signal --add event=mission_control_exit action="yabai -m config active_window_opacity 1.0"
+
 ###############################################################################
 #                              Signal events
 ###############################################################################
@@ -135,6 +158,16 @@ yabai -m config \
   window_placement second_child \
   window_zoom_persist on \
   insert_feedback_color 0xffd75f5f \
+  window_animation_duration 2 \
+  window_animation_frame_rate 120 \
+  window_opacity_duration 0.0 \
+  active_window_border_color 0xff775759 \
+  normal_window_border_color 0xff555555 \
+  window_border_width 4 \
+  window_border_radius 12 \
+  window_border_blur off \
+  window_border_hidpi on \
+  window_border off \
   split_ratio 0.50 \
   split_type auto \
   auto_balance off \

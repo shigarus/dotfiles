@@ -2,6 +2,7 @@ fish_add_path -g '$HOME/.cargo/bin'
 fish_add_path -g $HOME/go/bin
 fish_add_path -g $HOME/apps
 fish_add_path -g $HOME/.krew/bin
+fish_add_path -g $HOME/Library/Python/3.9/bin
 source $__fish_config_dir/env.fish
 if status is-interactive
     set -g fish_greeting
@@ -93,8 +94,9 @@ if status is-interactive
                 set cmd (string split " " -- $argv)[1]
                 # to make it work on mac first time - open Script editor, run a command inside quotes and
                 # allow notifications from the editor
-                if ! string match -r 'k9s|vim|sleep|lazygit|git|ivm-login|kubie|python' "$cmd" -q
+                if ! string match -r 'tssh|k9s|vim|sleep|lazygit|git|ivm-login|kubie|python' "$cmd" -q
                     osascript -e "display notification \"$argv\" with title \"$cmd\""
+                    unforgetui add-note --title "$cmd" --msg "$argv" --source shell
                 end
             end
         end
@@ -103,5 +105,9 @@ if status is-interactive
 
     if test -e $HOME/work-dotfiles/work_config.fish
         source $HOME/work-dotfiles/work_config.fish
+    end
+    # The next line updates PATH for the Google Cloud SDK.
+    if [ -f '/Users/shigarus/Downloads/google-cloud-sdk/path.fish.inc' ]
+        . '/Users/shigarus/Downloads/google-cloud-sdk/path.fish.inc'
     end
 end

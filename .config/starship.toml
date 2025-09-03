@@ -1,5 +1,5 @@
 format="""
-$username$directory$git_branch$kubernetes$gcloud$aws$custom$cmd_duration$sudo$line_break\
+$username$directory$git_branch$kubernetes$custom$cmd_duration$sudo$line_break\
 $jobs\
 $battery\
 $status\
