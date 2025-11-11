@@ -3,6 +3,7 @@ fish_add_path -g $HOME/go/bin
 fish_add_path -g $HOME/apps
 fish_add_path -g $HOME/.krew/bin
 fish_add_path -g $HOME/Library/Python/3.9/bin
+fish_add_path -g /Users/shigarus/.config/newbius/bin/
 source $__fish_config_dir/env.fish
 if status is-interactive
     set -g fish_greeting
@@ -81,8 +82,9 @@ if status is-interactive
         starship module character
         # end
     end
-    function starship_transient_rprompt_func
+    function starship_transient_prompt_func
         starship module time
+        starship module character
     end
     starship init fish | source
     enable_transience
