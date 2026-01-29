@@ -113,3 +113,8 @@ if status is-interactive
         . '/Users/shigarus/Downloads/google-cloud-sdk/path.fish.inc'
     end
 end
+
+switch (uname)
+    case Linux
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv fish)"
+end
