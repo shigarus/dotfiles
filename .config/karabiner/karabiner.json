@@ -102,7 +102,7 @@
                                     "key_code": "j",
                                     "modifiers": { "mandatory": ["option", "shift", "control"] }
                                 },
-                                "to": [{ "shell_command": "open -a 'Zen Browser.app'" }],
+                                "to": [{ "shell_command": "open -a 'Zen.app'" }],
                                 "type": "basic"
                             }
                         ]

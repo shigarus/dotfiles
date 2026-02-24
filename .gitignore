@@ -1,4 +1,8 @@
-.config/tmux/plugins
+*.DS_Store
+.config/nvim
+.config/k9s/*
+!.config/k9s/config.yaml
+!.config/k9s/skins
 .config/fish/completions
 .config/fish/conf.d/fzf.fish
 .config/fish/conf.d/rustup.fish
@@ -8,3 +12,4 @@
 .config/fish/functions/fisher.fish
 .config/fish/functions/fish_user_key_bindings.fish
 .config/fish/functions/fzf_configure_bindings.fish
+.config/tmux/plugins

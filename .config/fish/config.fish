@@ -49,7 +49,7 @@ if status is-interactive
     alias lsg="eza --color=always -1 -l --git --no-filesize --no-user --no-permissions --icons=always --no-time --group-directories-first"
     alias lst="eza --color=always -1 -l --no-filesize --no-user --no-permissions --icons=always -T -L 2 --no-time --group-directories-first"
     alias lsw="eza --color=always -1 -l --git --icons=always -T -L 2 --no-time --group-directories-first"
-    set -gx BAT_THEME "Monokai Extended Origin"
+    set -gx BAT_THEME everforest
 
     function starship_transient_prompt_func
         if test "$CMD_DURATION" -ge 3000
@@ -98,12 +98,16 @@ if status is-interactive
                 # allow notifications from the editor
                 if ! string match -r 'tssh|k9s|vim|sleep|lazygit|git|ivm-login|kubie|python' "$cmd" -q
                     osascript -e "display notification \"$argv\" with title \"$cmd\""
-                    unforgetui add-note --title "$cmd" --msg "$argv" --source shell
+                    if type -q unforgetui
+                        unforgetui add-note --title "$cmd" --msg "$argv" --source shell
+                    end
                 end
             end
         end
     end
-    fzf_configure_bindings
+    if type -q fzf_configure_bindings
+        fzf_configure_bindings
+    end
 
     if test -e $HOME/work-dotfiles/work_config.fish
         source $HOME/work-dotfiles/work_config.fish
@@ -116,5 +120,5 @@ end
 
 switch (uname)
     case Linux
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv fish)"
+        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv fish)"
 end
