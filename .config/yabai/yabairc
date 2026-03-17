@@ -24,16 +24,24 @@ yabai -m rule --add app="^${apps_mgoff_above}$" manage=off sub-layer=above
 #                          Custom padding settings
 ###############################################################################
 
-if command -v sketchybar &>/dev/null; then
-    if [[ "$(system_profiler SPDisplaysDataType | grep Resolution)" == *"2160"* ]]; then
-        yabai -m config top_padding 38
-        yabai -m config right_padding 260
-    else
-        yabai -m config top_padding 10
-        yabai -m config right_padding 230
-    fi
-    yabai -m config bottom_padding 0
-    yabai -m config left_padding 0
+if command -v sketchybar &> /dev/null; then
+  if [[ "$(system_profiler SPDisplaysDataType | grep Resolution)" == *"2160"* ]]; then
+    yabai -m config top_padding 38
+    yabai -m config right_padding 260
+    kitty_x=3580
+    kitty_y=38
+    kitty_w=260
+    kitty_h=1061
+  else
+    yabai -m config top_padding 10
+    yabai -m config right_padding 230
+    kitty_x=1240
+    kitty_y=40
+    kitty_w=230
+    kitty_h=473
+  fi
+  yabai -m config bottom_padding 0
+  yabai -m config left_padding 0
   # Check the display size (e.g., grab the resolution here)
   # display_resolution=$(system_profiler SPDisplaysDataType | grep Resolution)
   # # First condition is to match my macbook pro, the * are used as wildcards
@@ -67,7 +75,14 @@ if command -v sketchybar &>/dev/null; then
 else
   yabai -m config top_padding 02
   yabai -m config bottom_padding 00
+  kitty_x=1240
+  kitty_y=2
+  kitty_w=230
+  kitty_h=473
 fi
+
+yabai -m rule --add app="^kitty$" manage=off
+yabai -m signal --add event=window_focused app="^kitty$" action="yabai -m window \$YABAI_WINDOW_ID --move abs:${kitty_x}:${kitty_y}; yabai -m window \$YABAI_WINDOW_ID --resize abs:${kitty_w}:${kitty_h}"
 
 ###############################################################################
 #                             Yabai Spaces
@@ -78,7 +93,6 @@ fi
 # https://github.com/koekeishiya/yabai/issues/1685
 
 yabai -m space 2 --label default
-
 
 ###############################################################################
 #                             sub-layer=normal
@@ -144,7 +158,7 @@ yabai -m signal --add event=mission_control_exit action="yabai -m config active_
 # I'm not sure what this does, I don't see a difference
 # Not sure if related to "skhd shortcuts should trigger the sketchybar event" in
 # the owner dotfiles
-if command -v sketchybar &>/dev/null; then
+if command -v sketchybar &> /dev/null; then
   yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
 fi
 
