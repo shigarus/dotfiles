@@ -122,3 +122,6 @@ switch (uname)
     case Linux
         eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv fish)"
 end
+
+# opencode
+fish_add_path /home/shigarus/.opencode/bin
