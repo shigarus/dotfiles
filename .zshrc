@@ -1,7 +1,7 @@
 #autoload -Uz +X compinit && compinit -u
 #autoload -U +X bashcompinit && bashcompinit
 
-alias ivm="ssh shigarus-ivm -X -A -L 1455:localhost:1455"
+alias ivm="ssh shigarus-ivm -X -A -L 1455:localhost:1455 -L 10350:localhost:10350"
 export PATH=/Users/shigarus/.config/newbius/bin/:$PATH
 
 return 0
