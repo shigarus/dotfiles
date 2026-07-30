@@ -1,0 +1,13 @@
+aliases: {}
+default_server: https://teamcity.nebius.dev
+servers:
+    https://teamcity:
+        token: ""
+        user: ""
+        guest: false
+        ro: false
+    https://teamcity.nebius.dev:
+        token: eyJ0eXAiOiAiVENWMiJ9.YW5kYTFXbzJzU3I3VjZxZjFRMG5PVmh0cU54.Y2Y3MzEzMDgtZGZkNi00YmM0LWFmYzUtZDdjYTM4MGRmY2Rl
+        user: shigarus
+        guest: false
+        ro: false

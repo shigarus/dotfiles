@@ -6,6 +6,73 @@
 # Load all the variables I need from the yabai_env.sh file
 source "$HOME/.config/yabai/yabai_env.sh"
 
+right_padding_pct=12
+
+set_padding_vars() {
+  if command -v sketchybar &> /dev/null; then
+    if [[ "$(system_profiler SPDisplaysDataType | grep Resolution)" == *"2160"* ]]; then
+      top_padding=38
+    else
+      top_padding=10
+    fi
+    bottom_padding=0
+    left_padding=0
+  else
+    top_padding=2
+    bottom_padding=0
+    left_padding=0
+  fi
+}
+
+apply_percentage_padding_all_spaces() {
+  set_padding_vars
+
+  yabai -m query --spaces | jq -r '.[] | "\(.display) \(.index)"' | while read -r did sid; do
+    [[ -z $did || -z $sid ]] && continue
+
+    dw=$(yabai -m query --displays --display "$did" | jq -r '.frame.w | floor')
+    right_padding=$(((dw * right_padding_pct + 50) / 100))
+
+    yabai -m config --space "$sid" top_padding "$top_padding"
+    yabai -m config --space "$sid" bottom_padding "$bottom_padding"
+    yabai -m config --space "$sid" left_padding "$left_padding"
+    yabai -m config --space "$sid" right_padding "$right_padding"
+  done
+}
+
+place_kitty_on_right_upper_half() {
+  local window_id="$1"
+  [[ -z $window_id ]] && return
+
+  did=$(yabai -m query --windows --window "$window_id" | jq -r '.display')
+  sid=$(yabai -m query --windows --window "$window_id" | jq -r '.space')
+
+  tp=$(yabai -m config --space "$sid" top_padding)
+  bp=$(yabai -m config --space "$sid" bottom_padding)
+
+  eval "$(yabai -m query --displays --display "$did" | jq -r '"dx=\(.frame.x|floor) dy=\(.frame.y|floor) dw=\(.frame.w|floor) dh=\(.frame.h|floor)"')"
+
+  right_padding=$(((dw * right_padding_pct + 50) / 100 - 8))
+  kitty_x=$((dx + dw - right_padding))
+  kitty_y=$((dy + tp))
+  kitty_w=$right_padding
+  kitty_h=$(((dh - tp - bp) / 2))
+
+  yabai -m window "$window_id" --move "abs:${kitty_x}:${kitty_y}"
+  yabai -m window "$window_id" --resize "abs:${kitty_w}:${kitty_h}"
+}
+
+case "${1:-}" in
+  --apply-padding)
+    apply_percentage_padding_all_spaces
+    exit 0
+    ;;
+  --place-kitty)
+    place_kitty_on_right_upper_half "${2:-}"
+    exit 0
+    ;;
+esac
+
 # THIS IS NOT FOR APP I USE
 # In order to prevent simple-bar freezing upon yabai restart, you'll need to add
 # this line at the start of your .yabairc file
@@ -25,23 +92,12 @@ yabai -m rule --add app="^${apps_mgoff_above}$" manage=off sub-layer=above
 ###############################################################################
 
 if command -v sketchybar &> /dev/null; then
-  if [[ "$(system_profiler SPDisplaysDataType | grep Resolution)" == *"2160"* ]]; then
-    yabai -m config top_padding 38
-    yabai -m config right_padding 260
-    kitty_x=3580
-    kitty_y=38
-    kitty_w=260
-    kitty_h=1061
-  else
-    yabai -m config top_padding 10
-    yabai -m config right_padding 230
-    kitty_x=1240
-    kitty_y=40
-    kitty_w=230
-    kitty_h=473
-  fi
-  yabai -m config bottom_padding 0
-  yabai -m config left_padding 0
+  set_padding_vars
+  yabai -m config top_padding "$top_padding"
+  yabai -m config bottom_padding "$bottom_padding"
+  yabai -m config left_padding "$left_padding"
+
+  apply_percentage_padding_all_spaces
   # Check the display size (e.g., grab the resolution here)
   # display_resolution=$(system_profiler SPDisplaysDataType | grep Resolution)
   # # First condition is to match my macbook pro, the * are used as wildcards
@@ -73,16 +129,19 @@ if command -v sketchybar &> /dev/null; then
   #   yabai -m config right_padding 230
   # fi
 else
-  yabai -m config top_padding 02
-  yabai -m config bottom_padding 00
-  kitty_x=1240
-  kitty_y=2
-  kitty_w=230
-  kitty_h=473
+  set_padding_vars
+  yabai -m config top_padding "$top_padding"
+  yabai -m config bottom_padding "$bottom_padding"
+
+  apply_percentage_padding_all_spaces
 fi
 
 yabai -m rule --add app="^kitty$" manage=off
-yabai -m signal --add event=window_focused app="^kitty$" action="yabai -m window \$YABAI_WINDOW_ID --move abs:${kitty_x}:${kitty_y}; yabai -m window \$YABAI_WINDOW_ID --resize abs:${kitty_w}:${kitty_h}"
+yabai -m signal --add event=window_focused app="kitty" action="bash $HOME/.config/yabai/yabairc --place-kitty \$YABAI_WINDOW_ID"
+yabai -m signal --add event=space_changed action="bash $HOME/.config/yabai/yabairc --apply-padding"
+yabai -m signal --add event=display_added action="bash $HOME/.config/yabai/yabairc --apply-padding"
+yabai -m signal --add event=display_removed action="bash $HOME/.config/yabai/yabairc --apply-padding"
+yabai -m signal --add event=display_moved action="bash $HOME/.config/yabai/yabairc --apply-padding"
 
 ###############################################################################
 #                             Yabai Spaces

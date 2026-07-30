@@ -1,0 +1,6 @@
+aliases: {}
+analytics_notice_shown: true
+default_server: https://teamcity.nebius.dev
+servers:
+    https://teamcity.nebius.dev:
+        user: shigarus

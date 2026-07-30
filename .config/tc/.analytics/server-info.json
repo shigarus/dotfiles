@@ -1,0 +1,6 @@
+{
+  "https://teamcity.nebius.dev": {
+    "version": "2025.7",
+    "type": "on_prem"
+  }
+}

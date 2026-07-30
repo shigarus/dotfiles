@@ -2,6 +2,7 @@
 #autoload -U +X bashcompinit && bashcompinit
 
 alias ivm="ssh shigarus-ivm -X -A -L 1455:localhost:1455 -L 10350:localhost:10350"
+# alias ivm="ssh -L 3333:127.0.0.1:3333 ${USER}-ivm tsh login --proxy bastion.man.nebiusinfra.net:443 bastion-man --browser=none --bind-addr=localhost:3333"
 export PATH=/Users/shigarus/.config/newbius/bin/:$PATH
 
 return 0

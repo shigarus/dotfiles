@@ -1,5 +1,7 @@
 clipy
 jetbrains/utils/teamcity
+emacs
+fd
 gimp
 ghostty
 macfuse
@@ -13,6 +15,7 @@ kind
 kubectx
 lazygit
 orbstack
+ripgrep
 tilt
 sketchybar
 vhs
