@@ -1,0 +1,133 @@
+;; Doom exposes five (optional) variables for controlling fonts in Doom:
+;;
+;; - `doom-font' -- the primary font to use
+;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
+;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
+;;   presentations or streaming.
+;; - `doom-symbol-font' -- for symbols
+;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
+;;
+;; See 'C-h v doom-font' for documentation and more examples of what they
+;; accept. For example:
+;;
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 18 :weight 'semi-light)
+     doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size 20))
+;;
+;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
+;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
+;; refresh your font settings. If Emacs still can't find your font, it likely
+;; wasn't installed correctly. Font issues are rarely Doom issues!
+
+;; There are two ways to load a theme. Both assume the theme is installed and
+;; available. You can either set `doom-theme' or manually load a theme with the
+;; `load-theme' function. This is the default:
+(setq doom-theme 'doom-everforest)
+;; of line numbers in effect. If set to `nil', line
+;; numbers are disabled. For relative line numbers, set this to `relative'.
+(setq display-line-numbers-type 'relative)
+
+(setq confirm-kill-emacs nil)
+(setq initial-buffer-choice 'ghostel)
+
+;; (find-sibling-rules)
+
+(evil-define-key 'normal 'global (kbd "s") 'avy-goto-char-2)
+
+;; If you use `org' and don't want your org files in the default location below,
+;; change `org-directory'. It must be set before org loads!
+(custom-theme-set-faces!
+     'doom-one
+     `(org-level-8 :inherit outline-3 :height 1.0)
+     `(org-level-7 :inherit outline-3 :height 1.0)
+     `(org-level-6 :inherit outline-3 :height 1.0)
+     `(org-level-5 :inherit outline-3 :height 1.1)
+     `(org-level-4 :inherit outline-3 :height 1.2)
+     `(org-level-3 :inherit outline-3 :height 1.4)
+     `(org-level-2 :inherit outline-2 :height 1.6)
+     `(org-level-1 :inherit outline-1 :height 1.8)
+     `(org-document-title :height 2.0 :bold t :unerline nil))
+(setq org-directory "~/nc/org/")
+
+;; All of this is in the main config.el
+(after! markdown-mode
+  (setopt markdown-hide-markup t
+         markdown-list-item-bullets '("-" "◦"))
+  ;; use proportional font
+  (add-hook 'markdown-mode-hook #'variable-pitch-mode))
+;; This can sit in top level, custom-set-faces! will handle the
+;; loading order
+(custom-set-faces!
+  ;; I don't actually remember what customizing this does
+  '(markdown-header-delimiter-face
+    :inherit markdown-markup-face
+    :weight bold)
+  ;; Don't add a background to inline code, like Org
+  `(markdown-inline-code-face
+    :background ,(face-background 'default))
+  ;; Don't use weird colors for headings
+  `((markdown-header-face
+     markdown-bold-face
+     markdown-italic-face
+     markdown-list-face)
+    :foreground ,(face-foreground 'default))
+  ;; Use sizes to distinguish between headings
+  ;; (this doesn't work well in a terminal and I still have to fix it for myself)
+  '(markdown-header-face-1
+    :inherit outline-1
+    :height 1.8)
+  '(markdown-header-face-2
+    :inherit outline-2
+    :height 1.6)
+  '(markdown-header-face-3
+    :inherit outline-3
+    :height 1.4)
+  '(markdown-header-face-4
+    :inherit outline-3
+    :height 1.2)
+  '(markdown-header-face-5
+    :inherit outline-3
+    :height 1.1)
+  '(markdown-header-face-6
+    :inherit outline-3
+    :height 1.0))
+
+;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+
+;; Place your private configuration here! Remember, you do not need to run 'doom
+;; sync' after modifying this file!
+
+
+;; Some functionality uses this to identify you, e.g. GPG configuration, email
+;; clients, file templates and snippets. It is optional.
+;; (setq user-full-name "John Doe"
+;;       user-mail-address "john@doe.com")
+
+
+;; This determines the style
+;; Whenever you reconfigure a package, make sure to wrap your config in an
+;; `with-eval-after-load' block, otherwise Doom's defaults may override your
+;; settings. E.g.
+;;
+;;   (with-eval-after-load 'PACKAGE
+;;     (setq x y))
+;;
+;; The exceptions to this rule:
+;;
+;;   - Setting file/directory variables (like `org-directory')
+;;   - Setting variables which explicitly tell you to set them before their
+;;     package is loaded (see 'C-h v VARIABLE' to look them up).
+;;   - Setting doom variables (which start with 'doom-' or '+').
+;;
+;; Here are some additional functions/macros that will help you configure Doom.
+;;
+;; - `load!' for loading external *.el files relative to this one
+;; - `add-load-path!' for adding directories to the `load-path', relative to
+;;   this file. Emacs searches the `load-path' when you load packages with
+;;   `require' or `use-package'.
+;; - `map!' for binding new keys
+;;
+;; To get information about any of these functions/macros, move the cursor over
+;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
+;; This will open documentation for it, including demos of how they are used.
+;; Alternatively, use `C-h o' to look up a symbol (functions, variables, faces,
+;; etc).

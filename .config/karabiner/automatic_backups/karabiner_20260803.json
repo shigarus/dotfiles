@@ -4,19 +4,6 @@
             "complex_modifications": {
                 "rules": [
                     {
-                        "description": "open emacs",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "period",
-                                    "modifiers": { "mandatory": ["option", "shift", "control"] }
-                                },
-                                "to": [{ "shell_command": "open -a 'Emacs.app'" }],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "open fusion",
                         "manipulators": [
                             {
@@ -151,8 +138,36 @@
                         "manipulators": [
                             {
                                 "from": {
+                                    "key_code": "left_command",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_command",
+                                        "lazy": true
+                                    }
+                                ],
+                                "to_if_alone": [{ "select_input_source": { "input_source_id": "com.apple.keylayout.ABC" } }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "right_command",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_command",
+                                        "lazy": true
+                                    }
+                                ],
+                                "to_if_alone": [{ "select_input_source": { "input_source_id": "com.apple.keylayout.Russian" } }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
                                     "key_code": "r",
-                                    "modifiers": { "mandatory": ["option", "shift", "control"] }
+                                    "modifiers": { "mandatory": ["left_command", "left_shift", "left_control"] }
                                 },
                                 "to": [{ "select_input_source": { "input_source_id": "com.apple.keylayout.Russian" } }],
                                 "type": "basic"
@@ -160,7 +175,7 @@
                             {
                                 "from": {
                                     "key_code": "e",
-                                    "modifiers": { "mandatory": ["option", "shift", "control"] }
+                                    "modifiers": { "mandatory": ["left_command", "left_shift", "left_control"] }
                                 },
                                 "to": [{ "select_input_source": { "input_source_id": "com.apple.keylayout.ABC" } }],
                                 "type": "basic"
