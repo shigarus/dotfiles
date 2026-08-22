@@ -11,3 +11,4 @@ mouse-scroll-multiplier = 0.5
 # background-opacity = 0.5
 clipboard-read = allow
 clipboard-write = allow
+font-size = 22

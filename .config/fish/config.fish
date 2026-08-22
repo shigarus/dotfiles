@@ -120,7 +120,9 @@ end
 
 switch (uname)
     case Linux
-        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv fish)"
+        if test -e /home/linuxbrew/.linuxbrew/bin/brew
+            eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv fish)"
+        end
 end
 
 fish_add_path /home/shigarus/.opencode/bin
