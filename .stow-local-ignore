@@ -1,5 +1,17 @@
 scripts
 brew_list
+brew_mac
+brew_tap
+brew_work
+common_apps
+desktop_both.sh
+fish_to_env.sh
+install-krew.sh
+install-nvm.sh
+mac-brew-custom.sh
+ppa
+ubuntu-install.sh
+ubuntu_apps
 
 
 # defualt ignore
