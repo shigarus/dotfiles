@@ -4,3 +4,4 @@ hl.workspace_rule({ workspace = "name:default", default = true, layout = "Monocl
 hl.workspace_rule({ workspace = "name:term", persistent = true, layout = "Monocle" })
 hl.workspace_rule({ workspace = "name:browser", default = true, persistent = true })
 hl.workspace_rule({ workspace = "name:tg", persistent = true })
+hl.workspace_rule({ workspace = "name:gaming", persistent = true })
