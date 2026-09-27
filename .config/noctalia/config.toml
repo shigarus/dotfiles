@@ -4,7 +4,7 @@ ui_scale = 1.20
 [bar.default]
 center = [ "workspaces", "spacer_1", "active_window" ]
 concave_edge_corners = true
-end = [ "media", "spacer_1", "tray", "notifications", "network", "volume", "session" ]
+end = [ "media", "spacer_1", "notifications", "network", "volume", "clock", "session" ]
 margin_edge = 0
 margin_ends = 0
 radius_bottom_left = 12
@@ -12,7 +12,7 @@ radius_bottom_right = 12
 radius_top_left = 0
 radius_top_right = 0
 scale = 1.10
-start = [ "launcher", "clock", "spacer_1", "group:g1" ]
+start = [ "launcher", "tray", "spacer_1", "group:g1" ]
 thickness = 35
 
     [[bar.default.capsule_group]]
@@ -140,3 +140,20 @@ capsule_fill = "on_primary"
 inactive_pill_size = 1.0
 pill_scale = 0.80
 show_labels = false
+
+[idle]
+# this is bs, there is no chargin/on_batter differentiation, pr https://github.com/noctalia-dev/noctalia/issues/3336
+behavior_order = ["lock", "screen-off", "suspend"]
+pre_action_fade_seconds = 2.0
+
+[idle.behavior.lock]
+timeout = 600
+action = "lock"
+
+[idle.behavior.screen-off]
+timeout = 660
+action = "screen_off"
+
+[idle.behavior.suspend]
+timeout = 900
+action = "lock_and_suspend"
