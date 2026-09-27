@@ -16,6 +16,10 @@ hl.config({
 	-- },
 })
 
+hl.device({
+	name = "zsa-technology-labs-voyager-touchpad",
+	accel_profile = "adaptive",
+})
 hl.gesture({ fingers = 4, direction = "horizontal", action = "workspace" })
 hl.gesture({ fingers = 3, direction = "down", action = "close" })
 hl.gesture({ fingers = 3, direction = "up", action = "fullscreen" })
