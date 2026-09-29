@@ -2,4 +2,4 @@
 
 TERMINAL = "ghostty"
 FILE_MANAGER = "dolphin"
-BROWSER = "firefox"
+BROWSER = "zen-browser"
