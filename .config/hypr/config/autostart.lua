@@ -6,7 +6,9 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("noctalia")
 	hl.exec_cmd("xhost +SI:localuser:root")
 	hl.exec_cmd("systemctl --user start hyprland-single-monitor.service")
-	hl.exec_cmd(TERMINAL, { workspace = "name:term" })
-	hl.exec_cmd(BROWSER, { workspace = "name:browser" })
+	if not REDUCE_RAM then
+		hl.exec_cmd(TERMINAL, { workspace = "name:term" })
+		hl.exec_cmd(BROWSER, { workspace = "name:browser" })
+	end
 	-- hl.exec_cmd("telegram", {workspace="special:tg"})
 end)
