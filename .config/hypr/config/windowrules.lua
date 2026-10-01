@@ -158,6 +158,6 @@ hl.layer_rule({
 	},
 	no_anim = true,
 	ignore_alpha = 0.5,
-	blur = true,
-	blur_popups = true,
+	blur = not REDUCE_RAM,
+	blur_popups = not REDUCE_RAM,
 })

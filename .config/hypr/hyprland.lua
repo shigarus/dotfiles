@@ -1,10 +1,12 @@
 -- CachyOS Hyprland Configuration
 
+-- has to be first to variables be avaible
+require("config.variables")
+
 require("config.animations")
 require("config.autostart")
 require("config.colors")
 require("config.decorations")
-require("config.variables")
 require("config.environment")
 require("config.inputs")
 require("config.binds")
