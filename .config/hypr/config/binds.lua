@@ -127,7 +127,7 @@ hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(noctCall .. "panel-toggle control-cen
 hl.bind(meh .. " + J", hl.dsp.focus({ workspace = "name:browser" }))
 hl.bind(meh .. " + K", hl.dsp.focus({ workspace = "name:term" }))
 hl.bind(meh .. " + I", hl.dsp.focus({ workspace = "name:tg" }))
-hl.bind(meh .. " + Y", hl.dsp.focus({ workspace = "name:default" }))
+hl.bind(meh .. " + Y", hl.dsp.focus({ workspace = "name:gaming" }))
 
 -- Move to adjacent workspaces and next empty on a given monitor
 hl.bind(mainMod .. " + Right", hl.dsp.focus({ workspace = "m+1" }))
