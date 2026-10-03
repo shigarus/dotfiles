@@ -1,8 +1,18 @@
+# Nixos
+
+```bash
+REPO_PATH="~/dotfiles"
+mkdir -p $REPO_PATH
+nix shell nixpkgs#git --command git clone git@github.com:shigarus/dotfiles.git $REPO_PATH
+$REPO_PATH/nix/upd.sh
+```
+
+
 # Home-manager for arch
 
 ``` bash
 #
-REPO_PATH="~/prjs/nixos"
+REPO_PATH="~/dotfiles"
 if ! command -v pacman >/dev/null 2>&1
 then
     echo "this is not arch, install nix some other way."
@@ -20,9 +30,8 @@ export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/
 nix-shell '<home-manager>' -A install
 echo 'experimental-features = nix-command flakes' | sudo tee -a /etc/nix/nix.conf
 mkdir -p $REPO_PATH
-nix shell nixpkgs#git --command git clone git@github.com:shigarus/nixos.git $REPO_PATH
-cd $REPO_PATH
-./upd.sh
+nix shell nixpkgs#git --command git clone git@github.com:shigarus/dotfiles.git $REPO_PATH
+$REPO_PATH/nix/upd.sh
 ```
 
 ## tailscale
