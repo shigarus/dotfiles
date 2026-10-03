@@ -6,6 +6,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("noctalia")
 	hl.exec_cmd("xhost +SI:localuser:root")
 	hl.exec_cmd("systemctl --user start hyprland-single-monitor.service")
+	hl.exec_cmd("systemctl --user cat sunshine.service >/dev/null 2>&1 && systemctl --user start sunshine")
 	if not REDUCE_RAM then
 		hl.exec_cmd(TERMINAL, { workspace = "name:term" })
 		hl.exec_cmd(BROWSER, { workspace = "name:browser" })
