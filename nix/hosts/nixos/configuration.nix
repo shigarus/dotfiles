@@ -19,10 +19,13 @@ in
       ./main-user.nix
       ../../nixos-modules/hyprland.nix
       ../../nixos-modules/flatpack.nix
+      ../../nixos-modules/k3s.nix
       ../../nixos-modules/remote-desktop.nix
     ];
 
   remote-desktop.user = user;
+
+  k3s.manifests.home-assitant.source = ../../k3s-manifests/home-assistant.yaml;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -99,7 +102,6 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    k3s # this is should be enabled as a service anyway, and service can be enabled only here
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -159,14 +161,13 @@ in
     # allow the Tailscale UDP port through the firewall
     allowedUDPPorts = [ config.services.tailscale.port ];
 
-    # let you SSH in over the public internet
-    allowedTCPPorts = [ 22 ];
+    allowedTCPPorts = [
+      # let you SSH in over the public internet
+      22
+      # TODO: for home-assistant, move into same place
+      8123
+    ];
   };
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

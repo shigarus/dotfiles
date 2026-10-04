@@ -12,6 +12,9 @@
     tailscale
   ];
 
-  # Make ghostty font smaller due to weird monitor setup
-  home.file = { ".config/ghostty/custom" = { text = '' font-size = 18 ''; };};
+  home.file = {
+    # Make ghostty font smaller due to weird monitor setup
+    ".config/ghostty/custom".text = '' font-size = 18 '';
+    ".home-assistant/cfg/.keep".text = "";
+  };
 }

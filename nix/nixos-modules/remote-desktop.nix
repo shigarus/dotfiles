@@ -1,7 +1,4 @@
 { config, lib, ... }:
-let
-  cfg = config.remote-desktop;
-in
 {
   options.remote-desktop.user = lib.mkOption {
     type = lib.types.str;
@@ -16,7 +13,7 @@ in
       openFirewall = true;
     };
 
-    users.users.${cfg.user}.extraGroups = [
+    users.users.${config.remote-desktop.user}.extraGroups = [
       "uinput"
     ];
 
