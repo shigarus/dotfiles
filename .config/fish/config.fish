@@ -35,6 +35,7 @@ if status is-interactive
     abbr -a --command git --set-cursor co -f _smart_commit_msg
     abbr -a --command git d diff
     abbr -a rsc "source ~/.config/fish/config.fish"
+    abbr -a ta tmux attach
 
     abbr -a v --set-cursor "vim ./%"
 
