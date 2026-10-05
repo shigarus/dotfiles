@@ -27,6 +27,19 @@ return {
       ['g.'] = { 'actions.toggle_hidden', mode = 'n' },
       ['g\\'] = { 'actions.toggle_trash', mode = 'n' },
     },
+    view_options = {
+      show_hidden = false,
+      is_hidden_file = function(name, bufnr)
+        local dir = require('oil').get_current_dir(bufnr)
+        local show_in = {
+          [vim.fn.expand '~/dotfiles/'] = true,
+        }
+        if show_in[dir] then
+          return false
+        end
+        return name:sub(1, 1) == '.'
+      end,
+    },
   },
   dependencies = { 'nvim-tree/nvim-web-devicons' }, -- use if prefer nvim-web-devicons
 }
