@@ -7,6 +7,14 @@ return {
     keymaps = {
       ['g?'] = { 'actions.show_help', mode = 'n' },
       ['<CR>'] = 'actions.select',
+      -- Global: regular buffers
+      ['<CR>'] = {
+        callback = function()
+          vim.cmd 'nohlsearch'
+          require('oil.actions').select.callback()
+        end,
+        desc = 'Clear highlight and select entry',
+      },
       ['<C-s>'] = { 'actions.select', opts = { vertical = true } },
       ['<C-h>'] = { 'actions.select', opts = { horizontal = true } },
       ['<C-p>'] = 'actions.preview',
