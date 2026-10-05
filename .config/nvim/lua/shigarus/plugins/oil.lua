@@ -34,7 +34,7 @@ return {
         local show_in = {
           [vim.fn.expand '~/dotfiles/'] = true,
         }
-        if show_in[dir] then
+        if show_in[dir] and name ~= '.git' then
           return false
         end
         return name:sub(1, 1) == '.'
