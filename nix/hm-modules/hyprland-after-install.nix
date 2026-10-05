@@ -23,6 +23,7 @@
           jq -r '.[] | select(.monitor != "eDP-1" and .ispersistent) | .name' |
           xargs -I{} sh -c 'hyprctl dispatch "hl.dsp.workspace.move({workspace=\"name:$1\",monitor=\"eDP-1\"})"' _ {}
 			fi
+      # TODO: add movin clients not from persistent workspaces to some scratch on another monitor
 		}
 
 		# Run once at startup
