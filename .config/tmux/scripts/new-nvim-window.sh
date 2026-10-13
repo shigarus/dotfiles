@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# VIBECODED
+# VIBECODE:
 # Open a directory picker popup, then a Neovim window or a new Neovim session.
 set -u
 

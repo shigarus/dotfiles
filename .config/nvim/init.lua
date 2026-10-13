@@ -192,6 +192,7 @@ vim.keymap.set({ 'n' }, '-', '<cmd>Oil<CR>')
 require 'shigarus.keymaps.markdown'()
 require 'shigarus.keymaps.life_quality'()
 require 'shigarus.keymaps.terminal'()
+require 'shigarus.autocmds.term-close'()
 
 vim.defer_fn(function()
   -- here are some settings that better to setup a bit after startup
