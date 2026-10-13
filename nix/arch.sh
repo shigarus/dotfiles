@@ -15,4 +15,7 @@ sudo sed -i '/nl_NL/d' /etc/locale.conf
 # only some third-party flakes I don't want to use
 sudo pacman -Suy zen-browser
 
+# to control TDP, requires service
+sudo pacman -Suy asusctl rog-control-center
+
 echo "INSTALL TAILSCALE SOMEHOW, THE KNOWLEDGE IS LOST"
