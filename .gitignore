@@ -6,7 +6,6 @@
 .config/fish/completions
 .config/fish/conf.d/fzf.fish
 .config/fish/conf.d/rustup.fish
-.config/fish/functions/_*
 .config/fish/fish_plugins
 .config/fish/fish_variables
 .config/fish/functions/fisher.fish
