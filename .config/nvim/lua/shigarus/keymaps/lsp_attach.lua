@@ -4,6 +4,13 @@ return function(buf)
     vim.keymap.set(mode, keys, func, { buffer = buf, desc = 'LSP: ' .. desc })
   end
 
+  local lsp_to_key = { harper_ls = 'h', gopls = 'g', bashls = 'b', lua_ls = 'l' }
+  for key, cmd in pairs { e = 'enable', d = 'disable' } do
+    for lsp, lsp_key in pairs(lsp_to_key) do
+      map('<leader>l' .. key .. lsp_key, '<cmd>lsp ' .. cmd .. ' ' .. lsp .. '<CR>', '[L]sp ' .. cmd .. ' ' .. lsp)
+    end
+  end
+
   -- Jump to the definition of the word under your cursor.
   --  This is where a variable was first declared, or where a function is defined, etc.
   --  To jump back, press <C-t>.
