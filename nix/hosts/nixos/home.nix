@@ -16,5 +16,6 @@
     # Make ghostty font smaller due to weird monitor setup
     ".config/ghostty/custom".text = '' font-size = 18 '';
     ".home-assistant/cfg/.keep".text = "";
+    ".home-assistant/matterjs-data/.keep".text = "";
   };
 }

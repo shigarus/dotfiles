@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matterjs
+  labels:
+    app: matterjs
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: matterjs
+  template:
+    metadata:
+      labels:
+        app: matterjs
+    spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+
+      terminationGracePeriodSeconds: 60
+
+      containers:
+        - name: matterjs
+          image: ghcr.io/matter-js/matterjs-server:stable
+          imagePullPolicy: Always
+
+          securityContext:
+            privileged: true
+
+          env:
+            - name: TZ
+              value: Europe/Amsterdam
+
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          hostPath:
+            path: /home/shigarus/.home-assistant/matterjs-data
+            type: Directory

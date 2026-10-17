@@ -26,6 +26,7 @@ in
   remote-desktop.user = user;
 
   k3s.manifests.home-assitant.source = ../../k3s-manifests/home-assistant.yaml;
+  k3s.manifests.matterjs.source = ../../k3s-manifests/matterjs.yaml;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
