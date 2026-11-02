@@ -1,16 +1,24 @@
 #autoload -Uz +X compinit && compinit -u
 #autoload -U +X bashcompinit && bashcompinit
 
-alias ivm="ssh shigarus-ivm -X -A -L 1455:localhost:1455 -L 10350:localhost:10350"
+# 10350 for nebius stuff
+# 1455 codex
+# 3118 slack mcp login
+# 37783 onyx
+# 44321 nsh port, have to be set in shell envs
+alias ivm="nsh expect-url ssh shigarus-ivm -X -A -L 3118:localhost:3118 -L 1455:localhost:1455 -L 10351:localhost:10350 -L 37783:localhost:37783 -L 44321:localhost:44321"
+# alias ivm="ssh shigarus-ivm -X -A -L 3118:localhost:3118 -L 1455:localhost:1455 -L 10351:localhost:10350 -L 37783:localhost:37783"
 # alias ivm="ssh -L 3333:127.0.0.1:3333 ${USER}-ivm tsh login --proxy bastion.man.nebiusinfra.net:443 bastion-man --browser=none --bind-addr=localhost:3333"
 export PATH=/Users/shigarus/.config/newbius/bin/:$PATH
 if [[ -o interactive && \
+      -z ps &&
       "$(ps --no-header --pid=$PPID --format=comm)" != "fish" && \
       -z "${ZSH_EXECUTION_STRING}" && \
       "$(uname)" == "Linux" ]]; then
     exec fish
 fi
 return 0
+
 
 # pesonal cli apps folder
 export PATH=/Users/shigarus/.cargo/bin:/Users/shigarus/go/bin:/Users/shigarus/apps:$PATH

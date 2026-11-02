@@ -59,7 +59,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.jdoe = import ./hosts/mac-serios/home.nix;
+            home-manager.users.shigarus = import ./hosts/mac-serios/home.nix;
           }
         ];
       };
