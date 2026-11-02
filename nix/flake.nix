@@ -51,7 +51,7 @@
       ];
     };
     darwinConfigurations = {
-      hostname = darwin.lib.darwinSystem {
+      mac-serios = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
           ./hosts/mac-serios/configuration.nix
