@@ -1,6 +1,8 @@
 -- local custom_monokai = require 'lualine.themes.monokai'
 -- custom_monokai.normal.c.bg = '#272822'
 
+local in_tmux = vim.env.TMUX ~= nil and vim.env.TMUX ~= ''
+
 Tmux_session_name = ''
 local function update_tmux_session_name()
   local p = io.popen 'tmux ls'
@@ -28,9 +30,15 @@ local function contiuous_upd()
   vim.defer_fn(contiuous_upd, 1000)
 end
 
-vim.defer_fn(contiuous_upd, 0)
+if in_tmux then
+  vim.defer_fn(contiuous_upd, 0)
+end
 
 local function tmux_windows()
+  if not in_tmux then
+    return ''
+  end
+
   local function trim(s)
     return (s:gsub('^%s+', ''):gsub('%s+$', ''))
   end
