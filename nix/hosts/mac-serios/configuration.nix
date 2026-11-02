@@ -20,7 +20,7 @@
     # The platform the configuration will be used on.
     nixpkgs.hostPlatform = "aarch64-darwin";
 
-    users.users.davish = {
+    users.users.shigarus = {
         name = "shigarus";
         home = "/Users/shigarus";
     };
