@@ -3,25 +3,23 @@
 
 local in_tmux = vim.env.TMUX ~= nil and vim.env.TMUX ~= ''
 
-Tmux_session_name = ''
+local tmux_session_name = ''
 local function update_tmux_session_name()
-  local p = io.popen 'tmux ls'
+  tmux_session_name = ''
+  local pane = vim.env.TMUX_PANE
+  if not in_tmux or not pane or pane == '' then
+    return
+  end
+
+  local p = io.popen('tmux display-message -p -t ' .. vim.fn.shellescape(pane) .. " '#{server_sessions}\t#{session_name}' 2>/dev/null")
   if not p then
     return
   end
-  local ctr = 0
-  local found_name = ''
-  for l in p:lines() do
-    ctr = ctr + 1
-    if l:match '(attached)' then
-      found_name = l:match '^([^:]+):'
-    end
-  end
+  local result = p:read '*l'
   p:close()
-  if ctr > 1 then
-    Tmux_session_name = found_name
-  else
-    Tmux_session_name = ''
+  local count, name = (result or ''):match '^(%d+)\t(.*)$'
+  if count and tonumber(count) > 1 then
+    tmux_session_name = name
   end
 end
 
@@ -30,9 +28,7 @@ local function contiuous_upd()
   vim.defer_fn(contiuous_upd, 1000)
 end
 
-if in_tmux then
-  vim.defer_fn(contiuous_upd, 0)
-end
+vim.defer_fn(contiuous_upd, 0)
 
 local function tmux_windows()
   if not in_tmux then
@@ -158,7 +154,7 @@ return {
       sections = {
         lualine_a = {
           function()
-            return Tmux_session_name
+            return tmux_session_name
           end,
           'mode',
         },
