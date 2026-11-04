@@ -31,28 +31,22 @@ end
 vim.defer_fn(contiuous_upd, 0)
 
 local function tmux_windows()
-  if not in_tmux then
+  local pane = vim.env.TMUX_PANE
+  if not in_tmux or not pane or pane == '' then
     return ''
   end
 
-  local function trim(s)
-    return (s:gsub('^%s+', ''):gsub('%s+$', ''))
+  local p = io.popen('tmux display-message -p -t ' .. vim.fn.shellescape(pane) .. " '#{session_id}' 2>/dev/null")
+  if not p then
+    return ''
+  end
+  local sid = p:read '*l'
+  p:close()
+  if not sid or sid == '' then
+    return ''
   end
 
-  -- Ensure we are inside tmux
-  do
-    local p = io.popen "tmux display-message -p '#{session_id}' 2>/dev/null"
-    if not p then
-      return ''
-    end
-    local sid = p:read '*a'
-    p:close()
-    if trim(sid) == '' then
-      return ''
-    end
-  end
-
-  local p = io.popen "tmux list-windows -F '#I #W #{window_active}'"
+  p = io.popen('tmux list-windows -t ' .. vim.fn.shellescape(sid) .. " -F '#I #W #{window_active}' 2>/dev/null")
   if not p then
     return ''
   end

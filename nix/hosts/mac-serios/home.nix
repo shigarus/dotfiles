@@ -7,21 +7,16 @@
 		enable = true;
 		config = {
 			Label = "org.shigarus.ssh-ivm";
-			# Load the external nsh installation from the user's shell PATH.
+			# Load rex and jq from the user's local shell PATH. The visible Rex
+			# session owns SSH; launchd only ensures that the session exists.
 			ProgramArguments = [
 				"/bin/zsh"
 				"-lic"
-				# 10350 for nebius stuff
-				# 1455 codex
-				# 3118 slack mcp login
-				# 37783 onyx
-				# 44321 nsh port, have to be set in shell envs
-				# 44333 my rex server
-				"exec nsh expect-url ssh shigarus-ivm -X -A -L 3118:localhost:3118 -L 1455:localhost:1455 -L 10351:localhost:10350 -L 37783:localhost:37783 -L 44321:localhost:44321 -L 44333:localhost:44333"
+				"exec bash ${pkgs.writeShellScript "ensure-ivm-session" (builtins.readFile ../../../.config/rex/scripts/ensure-ivm-session.sh)} ${pkgs.writeShellScript "ivm-tunnel" (builtins.readFile ../../../.config/rex/scripts/ivm-tunnel.sh)}"
 			];
 			RunAtLoad = true;
-			KeepAlive = true;
-			ThrottleInterval = 30;
+			KeepAlive = false;
+			StartInterval = 30;
 			LimitLoadToSessionType = "Aqua";
 			WorkingDirectory = config.home.homeDirectory;
 			StandardOutPath = "${config.home.homeDirectory}/Library/Logs/shigarus-ivm.log";

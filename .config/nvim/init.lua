@@ -11,6 +11,10 @@ vim.g.have_nerd_font = true
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
+if vim.fn.executable 'fish' == 1 then
+  vim.opt.shell = vim.fn.exepath 'fish'
+end
+
 -- Make line numbers default
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
@@ -32,6 +36,23 @@ vim.opt.showmode = false
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.schedule(function()
+  if vim.env.REX_BLOCK then
+    local osc52 = require 'vim.ui.clipboard.osc52'
+    local function paste()
+      return 0
+    end
+    vim.g.clipboard = {
+      name = 'osc52 copy only',
+      copy = {
+        ['+'] = osc52.copy '+',
+        ['*'] = osc52.copy '*',
+      },
+      paste = {
+        ['+'] = paste,
+        ['*'] = paste,
+      },
+    }
+  end
   vim.opt.clipboard = 'unnamedplus'
 end)
 
